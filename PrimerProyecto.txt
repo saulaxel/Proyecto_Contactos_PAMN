@@ -1,0 +1,183 @@
+Primer Proyecto Programación avanzada
+
+Consta de dos programas: Uno para añadir contactos
+codificados a un archivo de texto y otro para 
+decodificarlos y mostrar los contactos en pantalla.
+
+		Estructura del proyecto
+
+Programa 1: Añadir y Codificar:
+						  Dificultad/tiempo requerido
+						  para esta actividad
+
+    
+	1.Mensajes iniciales: Presentación del proyecto.............0.5
+	e integrantes con buena presentación y también
+	las instrucciones para el usuario.
+	
+	2.Leer los contactos existentes:........................... 2	
+	Función con valor de retorno entero invocada 
+	desde main cuyo argumento es un apuntador a
+	FILE con el cual referenciar el archivo que
+	se abrirá y el nombre del arreglo de Contactos
+	en donde pondrá la información leida.
+	Abrirá el archivo para lectura validando
+	que exista. Se leerá contacto a contacto 
+	guardando la información de cada uno en un 
+	arreglo de estructuras "contacto" mientras que 
+	se cuenta cuantos contactos se leen con una
+	variable contadora cuidando que esta no 
+	sobrepase el número máximo de contactos permitidos.
+	Cuando se llegue al final del archivo este se
+	cierra.
+	Si no existia el archivo o este no tenía 
+	información el número de contactos deberá
+	permanecer en 0, si se llega al número maximo
+	de contactos se deberá dejer de leer y el 
+	contador de contactos permanecera como ese número 
+	máximo. En cualquier caso el contador de contactos
+	será el valor de retorno de la función.
+
+	3.Decodificar:............................................. 1
+	Cada "Contacto" se leyo codificado del archivo por
+	lo que hace falta decodificar todos sus datos. Dicha
+	responsabilidad recae en la función decodificar que
+	será llamada desde el main con el nombre del arreglo
+	de Contactos y el número de contactos como argumentos.
+	Usara estos argumentos para recorrer todos los contactos
+	y sus respectivos elementos restandole 3 a cada caracter
+	que los componga desaciendo así su codificación. La función
+	decodificar no requiere regresar ningún valor, solo hacer
+	bien su función.
+	
+	
+	4.Menú de opciones para que el usuario elija............... 1
+	(tentativamente será un ciclo que cada vez 
+	que termine una acción vuelva a preguntar al 
+	usuario lo que quiere hacer hasta que este elija
+	"salir").
+	Quien se encargue de esta sección solo llamará a
+	funciónes desde el main de acuerdo a la opció
+	que el usuario elija y hara un par de calculos extra
+	como sumar o restar uno al contador de elementos cuando
+	las funciones de añadir contacto o borrar contacto resultan
+	exitosas: 
+	    a)Añadir contacto: función con valor de................ 3
+	    retorno entero que será llamada desde main
+	    con el nombre del arreglo de Contactos y el
+            número de contactos como argumento para
+	    añadir un contacto en este.
+	    Primero verificará si hay espacio en el arreglo
+	    de estructuras "Contacto" y en caso contrario 
+	    mandará un mensaje de error al usuario y 
+	    regresará al menú con el valor de retorno 0.
+	    Si hay espacio se pedirá datos al
+	    usuario, serán validados (en especial el
+	    nombre del contacto, el cual no debe
+	    repetirse con ningun otro) y guardados 
+	    en el elemento del arreglo de "contactos"
+	    que corresponda para finalmente regresar
+	    un 1 que indique que la función cumplio
+	    su deber correctamente.
+	    El encargado del menú que llamo a la función en
+	    primer lugar se encargará de evaluar este valor de 
+	    retorno para saber si aumenta el contador de 
+	    contactos o lo deja como está
+	    Si el contacto se añade .
+	    b)Borrar contacto: Función con valor de................ 3
+	    retorno entera que será llamada desde el menú
+	    si el usuario elige esta opción.
+	    La función tendra por argumentos el nombre del 
+	    arreglo de Contactos y el contador de contactos
+	    con el fin de que pueda buscar y manejar el 
+	    contacto a borrar.
+	    Se pedirá un nombre al usuario 
+	    y so buscara en el arreglo de "contactos". 
+	    Si encuentra el nombre introducido, borrara
+	    todos los datos de la estructura a la que 
+	    este corresponda y si dicho contacto no es
+	    el ultimo en el arreglo se recorreran todos
+	    los que le siguen para no dejar hueco ademas 
+	    de regresar 1 para indicar el exito de la función.
+	    En caso de que no se encuentre se regresa 0 
+	    indicando que fallo la función. 
+	    El encargado del menú evaluara esta valor de 
+	    retorno para saber si debe restar uno al 
+	    contador de Contactos o lo debe dejar como está.
+
+	    c)Actualizar contacto: Parecida a la función........... 4 
+	    anterior en el sentido de que se tendrá que 
+	    buscar el contacto y si no aparece se mostrará
+	    un mensaje de error y la función termina,
+	    sin embargo si el contacto aparece se mostrara
+	    otro menú que pregunte al usuario que dato del 
+	    contacto desea cambiar. 
+	    Cuando el usuario elija se deberá pedir 
+	    el dato que remplazara al original con su 
+	    pertinente validación y se sobreescribirá 
+	    este valor en donde estabá el antiguo.
+		
+		****NOTA: En el menú se puede añadir la función de mostrar
+		los contactos actuales pero eso es justo lo que hace el otro
+		programa por lo que es preferible no repetirlo.
+
+	    d)Salir: Aunque su nombre diga salir, este 
+	    inciso desencadenara varias acciones:
+		
+		Salir-1)Codificar: .................................... 1
+		Función que será llamada desde el menú y recorrerá
+		todos los "Contactos" y sus respectivos
+		elementos sumandole 3 a los caracteres 
+		de que están compuestos.
+		Esta función guarda parecido con la función
+		codificar por lo que preferentemente las
+		deberá hacer la misma persona
+		
+		Salir-2)Escribir: Función analoga a leer pero.......... 1
+		más sencilla cuyos parametros son el nombre
+		del arreglo de Contactos y el contador de 
+		contactos que usará para escribirlos en el
+		archivo de texto. Debe abrir el archivo
+		para escritura ("w") lo cual borrará su
+		contenido previo, después escribirá en el
+		archivo el contenido de los elementos de
+		tipo "Contacto" del arreglo separados por 
+		tabuladores y en una linea cada uno. Como 
+		esta función no contará nada no requiere
+		valor de retorno.
+
+		Salir-3) Se romperá la condición que mantenia......Ya contemplado por el creador del menú
+		el ciclo
+	5.Mensaje de despedida al usuario con ascii,................. 0.5
+	de prerencia elegante. También agradecimiento al usuario 
+	por usar la aplicación.
+	Mostrar nuevamente los nombres de los desarrolladores
+
+	 
+Fin del programa 1
+
+
+Programa 2: Decodificar y Mostrar:
+						  Dificultad/tiempo requerido
+						  para esta actividad
+	
+	1. Mensaje inicial: Ya no requiere presentación...........0.5 
+	del proyecto pues está ya se vio en el otro 
+	programa, sin embargo aún mostrará a los 
+	creadores y explicará de que se trata el programa
+	
+	2.Leer los contactos existentes y decodificar: ...........Ya realizado
+	Estas funciones serán identicas a las usadas en el programa 1
+	por lo que solo se copiarán y pegarán en este. 
+	
+	3.Impresión con formato: Se escribira en la pantalla....... 1
+	algo como "La lista de usuarios es:" así como columnas
+	que tengan los diferentes datos en la siguiente linea
+	tal como "Nombre	Telefono  ..." etc y debajo se 
+	imprimirán Contactos con sus datos en las columnas 
+	correspondientes. 
+	
+	4. Mensaje de despedida: .................................Ya realizado
+	Se puede usar el mismo que en el programa 1 
+
+Fin del programa 2
