@@ -1,123 +1,123 @@
-Primer Proyecto ProgramaciÛn avanzada
+Primer Proyecto Programaci√≥n avanzada
 
-Consta de dos programas: Uno para aÒadir contactos
+Consta de dos programas: Uno para a√±adir contactos
 codificados a un archivo de texto y otro para 
 decodificarlos y mostrar los contactos en pantalla.
 
 		Estructura del proyecto
 
-Programa 1: AÒadir y Codificar:
+Programa 1: A√±adir y Codificar:
 						  Dificultad/tiempo requerido
 						  para esta actividad
 
     
-	1.Mensajes iniciales: PresentaciÛn del proyecto.............0.5
-	e integrantes con buena presentaciÛn y tambiÈn
+	1.Mensajes iniciales: Presentaci√≥n del proyecto.............0.5
+	e integrantes con buena presentaci√≥n y tambi√©n
 	las instrucciones para el usuario.
 	
 	2.Leer los contactos existentes:........................... 2	
-	FunciÛn con valor de retorno entero invocada 
+	Funci√≥n con valor de retorno entero invocada 
 	desde main cuyo argumento es un apuntador a
 	FILE con el cual referenciar el archivo que
-	se abrir· y el nombre del arreglo de Contactos
-	en donde pondr· la informaciÛn leida.
-	Abrir· el archivo para lectura validando
-	que exista. Se leer· contacto a contacto 
-	guardando la informaciÛn de cada uno en un 
+	se abrir√° y el nombre del arreglo de Contactos
+	en donde pondr√° la informaci√≥n leida.
+	Abrir√° el archivo para lectura validando
+	que exista. Se leer√° contacto a contacto 
+	guardando la informaci√≥n de cada uno en un 
 	arreglo de estructuras "contacto" mientras que 
 	se cuenta cuantos contactos se leen con una
 	variable contadora cuidando que esta no 
-	sobrepase el n˙mero m·ximo de contactos permitidos.
+	sobrepase el n√∫mero m√°ximo de contactos permitidos.
 	Cuando se llegue al final del archivo este se
 	cierra.
-	Si no existia el archivo o este no tenÌa 
-	informaciÛn el n˙mero de contactos deber·
-	permanecer en 0, si se llega al n˙mero maximo
-	de contactos se deber· dejer de leer y el 
-	contador de contactos permanecera como ese n˙mero 
-	m·ximo. En cualquier caso el contador de contactos
-	ser· el valor de retorno de la funciÛn.
+	Si no existia el archivo o este no ten√≠a 
+	informaci√≥n el n√∫mero de contactos deber√°
+	permanecer en 0, si se llega al n√∫mero maximo
+	de contactos se deber√° dejer de leer y el 
+	contador de contactos permanecera como ese n√∫mero 
+	m√°ximo. En cualquier caso el contador de contactos
+	ser√° el valor de retorno de la funci√≥n.
 
 	3.Decodificar:............................................. 1
 	Cada "Contacto" se leyo codificado del archivo por
 	lo que hace falta decodificar todos sus datos. Dicha
-	responsabilidad recae en la funciÛn decodificar que
-	ser· llamada desde el main con el nombre del arreglo
-	de Contactos y el n˙mero de contactos como argumentos.
+	responsabilidad recae en la funci√≥n decodificar que
+	ser√° llamada desde el main con el nombre del arreglo
+	de Contactos y el n√∫mero de contactos como argumentos.
 	Usara estos argumentos para recorrer todos los contactos
 	y sus respectivos elementos restandole 3 a cada caracter
-	que los componga desaciendo asÌ su codificaciÛn. La funciÛn
-	decodificar no requiere regresar ning˙n valor, solo hacer
-	bien su funciÛn.
+	que los componga desaciendo as√≠ su codificaci√≥n. La funci√≥n
+	decodificar no requiere regresar ning√∫n valor, solo hacer
+	bien su funci√≥n.
 	
 	
-	4.Men˙ de opciones para que el usuario elija............... 1
-	(tentativamente ser· un ciclo que cada vez 
-	que termine una acciÛn vuelva a preguntar al 
+	4.Men√∫ de opciones para que el usuario elija............... 1
+	(tentativamente ser√° un ciclo que cada vez 
+	que termine una acci√≥n vuelva a preguntar al 
 	usuario lo que quiere hacer hasta que este elija
 	"salir").
-	Quien se encargue de esta secciÛn solo llamar· a
-	funciÛnes desde el main de acuerdo a la opciÛ
+	Quien se encargue de esta secci√≥n solo llamar√° a
+	funci√≥nes desde el main de acuerdo a la opci√≥
 	que el usuario elija y hara un par de calculos extra
 	como sumar o restar uno al contador de elementos cuando
-	las funciones de aÒadir contacto o borrar contacto resultan
+	las funciones de a√±adir contacto o borrar contacto resultan
 	exitosas: 
-	    a)AÒadir contacto: funciÛn con valor de................ 3
-	    retorno entero que ser· llamada desde main
+	    a)A√±adir contacto: funci√≥n con valor de................ 3
+	    retorno entero que ser√° llamada desde main
 	    con el nombre del arreglo de Contactos y el
-            n˙mero de contactos como argumento para
-	    aÒadir un contacto en este.
-	    Primero verificar· si hay espacio en el arreglo
+            n√∫mero de contactos como argumento para
+	    a√±adir un contacto en este.
+	    Primero verificar√° si hay espacio en el arreglo
 	    de estructuras "Contacto" y en caso contrario 
-	    mandar· un mensaje de error al usuario y 
-	    regresar· al men˙ con el valor de retorno 0.
-	    Si hay espacio se pedir· datos al
-	    usuario, ser·n validados (en especial el
+	    mandar√° un mensaje de error al usuario y 
+	    regresar√° al men√∫ con el valor de retorno 0.
+	    Si hay espacio se pedir√° datos al
+	    usuario, ser√°n validados (en especial el
 	    nombre del contacto, el cual no debe
 	    repetirse con ningun otro) y guardados 
 	    en el elemento del arreglo de "contactos"
 	    que corresponda para finalmente regresar
-	    un 1 que indique que la funciÛn cumplio
+	    un 1 que indique que la funci√≥n cumplio
 	    su deber correctamente.
-	    El encargado del men˙ que llamo a la funciÛn en
-	    primer lugar se encargar· de evaluar este valor de 
+	    El encargado del men√∫ que llamo a la funci√≥n en
+	    primer lugar se encargar√° de evaluar este valor de 
 	    retorno para saber si aumenta el contador de 
-	    contactos o lo deja como est·
-	    Si el contacto se aÒade .
-	    b)Borrar contacto: FunciÛn con valor de................ 3
-	    retorno entera que ser· llamada desde el men˙
-	    si el usuario elige esta opciÛn.
-	    La funciÛn tendra por argumentos el nombre del 
+	    contactos o lo deja como est√°
+	    Si el contacto se a√±ade .
+	    b)Borrar contacto: Funci√≥n con valor de................ 3
+	    retorno entera que ser√° llamada desde el men√∫
+	    si el usuario elige esta opci√≥n.
+	    La funci√≥n tendra por argumentos el nombre del 
 	    arreglo de Contactos y el contador de contactos
 	    con el fin de que pueda buscar y manejar el 
 	    contacto a borrar.
-	    Se pedir· un nombre al usuario 
+	    Se pedir√° un nombre al usuario 
 	    y so buscara en el arreglo de "contactos". 
 	    Si encuentra el nombre introducido, borrara
 	    todos los datos de la estructura a la que 
 	    este corresponda y si dicho contacto no es
 	    el ultimo en el arreglo se recorreran todos
 	    los que le siguen para no dejar hueco ademas 
-	    de regresar 1 para indicar el exito de la funciÛn.
+	    de regresar 1 para indicar el exito de la funci√≥n.
 	    En caso de que no se encuentre se regresa 0 
-	    indicando que fallo la funciÛn. 
-	    El encargado del men˙ evaluara esta valor de 
+	    indicando que fallo la funci√≥n. 
+	    El encargado del men√∫ evaluara esta valor de 
 	    retorno para saber si debe restar uno al 
-	    contador de Contactos o lo debe dejar como est·.
+	    contador de Contactos o lo debe dejar como est√°.
 
-	    c)Actualizar contacto: Parecida a la funciÛn........... 4 
-	    anterior en el sentido de que se tendr· que 
-	    buscar el contacto y si no aparece se mostrar·
-	    un mensaje de error y la funciÛn termina,
+	    c)Actualizar contacto: Parecida a la funci√≥n........... 4 
+	    anterior en el sentido de que se tendr√° que 
+	    buscar el contacto y si no aparece se mostrar√°
+	    un mensaje de error y la funci√≥n termina,
 	    sin embargo si el contacto aparece se mostrara
-	    otro men˙ que pregunte al usuario que dato del 
+	    otro men√∫ que pregunte al usuario que dato del 
 	    contacto desea cambiar. 
-	    Cuando el usuario elija se deber· pedir 
+	    Cuando el usuario elija se deber√° pedir 
 	    el dato que remplazara al original con su 
-	    pertinente validaciÛn y se sobreescribir· 
-	    este valor en donde estab· el antiguo.
+	    pertinente validaci√≥n y se sobreescribir√° 
+	    este valor en donde estab√° el antiguo.
 		
-		****NOTA: En el men˙ se puede aÒadir la funciÛn de mostrar
+		****NOTA: En el men√∫ se puede a√±adir la funci√≥n de mostrar
 		los contactos actuales pero eso es justo lo que hace el otro
 		programa por lo que es preferible no repetirlo.
 
@@ -125,32 +125,32 @@ Programa 1: AÒadir y Codificar:
 	    inciso desencadenara varias acciones:
 		
 		Salir-1)Codificar: .................................... 1
-		FunciÛn que ser· llamada desde el men˙ y recorrer·
+		Funci√≥n que ser√° llamada desde el men√∫ y recorrer√°
 		todos los "Contactos" y sus respectivos
 		elementos sumandole 3 a los caracteres 
-		de que est·n compuestos.
-		Esta funciÛn guarda parecido con la funciÛn
+		de que est√°n compuestos.
+		Esta funci√≥n guarda parecido con la funci√≥n
 		codificar por lo que preferentemente las
-		deber· hacer la misma persona
+		deber√° hacer la misma persona
 		
-		Salir-2)Escribir: FunciÛn analoga a leer pero.......... 1
-		m·s sencilla cuyos parametros son el nombre
+		Salir-2)Escribir: Funci√≥n analoga a leer pero.......... 1
+		m√°s sencilla cuyos parametros son el nombre
 		del arreglo de Contactos y el contador de 
-		contactos que usar· para escribirlos en el
+		contactos que usar√° para escribirlos en el
 		archivo de texto. Debe abrir el archivo
-		para escritura ("w") lo cual borrar· su
-		contenido previo, despuÈs escribir· en el
+		para escritura ("w") lo cual borrar√° su
+		contenido previo, despu√©s escribir√° en el
 		archivo el contenido de los elementos de
 		tipo "Contacto" del arreglo separados por 
 		tabuladores y en una linea cada uno. Como 
-		esta funciÛn no contar· nada no requiere
+		esta funci√≥n no contar√° nada no requiere
 		valor de retorno.
 
-		Salir-3) Se romper· la condiciÛn que mantenia......Ya contemplado por el creador del men˙
+		Salir-3) Se romper√° la condici√≥n que mantenia......Ya contemplado por el creador del men√∫
 		el ciclo
 	5.Mensaje de despedida al usuario con ascii,................. 0.5
-	de prerencia elegante. TambiÈn agradecimiento al usuario 
-	por usar la aplicaciÛn.
+	de prerencia elegante. Tambi√©n agradecimiento al usuario 
+	por usar la aplicaci√≥n.
 	Mostrar nuevamente los nombres de los desarrolladores
 
 	 
@@ -161,23 +161,23 @@ Programa 2: Decodificar y Mostrar:
 						  Dificultad/tiempo requerido
 						  para esta actividad
 	
-	1. Mensaje inicial: Ya no requiere presentaciÛn...........0.5 
-	del proyecto pues est· ya se vio en el otro 
-	programa, sin embargo a˙n mostrar· a los 
-	creadores y explicar· de que se trata el programa
+	1. Mensaje inicial: Ya no requiere presentaci√≥n...........0.5 
+	del proyecto pues est√° ya se vio en el otro 
+	programa, sin embargo a√∫n mostrar√° a los 
+	creadores y explicar√° de que se trata el programa
 	
-	2.Leer los contactos existentes y decodificar: ...........Ya realizado
-	Estas funciones ser·n identicas a las usadas en el programa 1
-	por lo que solo se copiar·n y pegar·n en este. 
+	2.Leer los contactos existentes y decodificar: ...........Ya realizado llegados a este punto
+	Estas funciones ser√°n identicas a las usadas en el programa 1
+	por lo que solo se copiar√°n y pegar√°n en este. 
 	
-	3.ImpresiÛn con formato: Se escribira en la pantalla....... 1
-	algo como "La lista de usuarios es:" asÌ como columnas
+	3.Impresi√≥n con formato: Se escribira en la pantalla....... 1
+	algo como "La lista de usuarios es:" as√≠ como columnas
 	que tengan los diferentes datos en la siguiente linea
 	tal como "Nombre	Telefono  ..." etc y debajo se 
-	imprimir·n Contactos con sus datos en las columnas 
+	imprimir√°n Contactos con sus datos en las columnas 
 	correspondientes. 
 	
-	4. Mensaje de despedida: .................................Ya realizado
+	4. Mensaje de despedida: .................................Ya realizado llegados a este punto
 	Se puede usar el mismo que en el programa 1 
 
 Fin del programa 2
