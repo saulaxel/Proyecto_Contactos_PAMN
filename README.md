@@ -7,7 +7,8 @@ Cuando alguién haga cambios a parte del codigo deberá enviar un Pull request p
 codigo original
 
 Por favor los integrantes del equipo apunten su nombre completo a continuación:
-*
+
+*SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
 *
 *
 *
