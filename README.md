@@ -8,9 +8,9 @@ codigo original
 
 Por favor los integrantes del equipo apunten su nombre completo a continuación:
 
-*SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
+* SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
+* CABRERA LÓPEZ OSCAR EMILIO
+* MENDOZA GARCÍA ULISES
 *
 *
-*
-*
-*
+* 
