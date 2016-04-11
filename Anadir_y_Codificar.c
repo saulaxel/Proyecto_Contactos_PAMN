@@ -36,7 +36,7 @@ void menu(int seleccion);
 
 struct contacto // Definición de la estructura "contacto"
 {
-	/*Datos de "contacto", todos alfanuméricos (cadenas) puesto que así son más faciles de manejar
+	//Datos de "contacto", todos alfanuméricos (cadenas) puesto que así son más faciles de manejar
 };
 
 typedef struct contacto Contacto; // Se define un alias para "struct contacto" que será "Contacto"
@@ -110,7 +110,7 @@ int main(int argc, char **argv){
 // imprime gatos, almohadillas o numerales, por los problemas con ascii en linux
 // alguien usando windows deberia corregirlo
 void presentacion () {
-	printf ("###############################################"); //
+	printf ("###############################################");
 	printf ("#   Universidad Nacional Aútonoma de México   #");
 	printf ("#            Facultad de Ingeniería           #");
 	printf ("#  Progamación avanzada y métodos numéricos   #");
