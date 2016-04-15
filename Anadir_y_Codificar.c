@@ -6,8 +6,6 @@
  * SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
  * CABRERA LÓPEZ OSCAR EMILIO
  * MENDOZA GARCÍA ULISES
- *
- *
  */
 
 #include <stdio.h> // Biblioteca estándar para la entrada y salida
@@ -27,7 +25,6 @@
 #else
 	#define CLEAR "clear"
 #endif
-
 
 struct contacto { // Definición de la estructura "contacto"
 	unsigned char nombre[MAX_NOMBRE]; //Declaramos nombre como cadena ascii extendido
@@ -125,6 +122,8 @@ int main (int argc, char *argv[]) {
 		case 1:
 			printf ("Seleccionaste la opción 1\n");
 			num_contactos = leerArchivo (ap_archivo, ap_lista_contactos);
+			printf ("%d, %s\n", num_contactos, ap_lista_contactos->nombre);
+			decodificar (ap_lista_contactos, num_contactos);
 			break;
 		case 2:
 			printf ("Seleccionaste la opción 2\n");
@@ -187,7 +186,7 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos){
 	   // modo lectura o creación, para asegurarnos que exista, nombre provisional
 	if (ap_archivo == NULL) {
 		printf ("\nNo se pudo leer, ni crear el archivo D:\n\t");
-		printf ("Aegurate de tener permisos suficientes para leer o escribir aquí\n");
+		printf ("Asegurate de tener permisos suficientes para leer o escribir aquí\n");
 		exit(-1);
 	}
 	while ( !feof(ap_archivo) && num_contactos < MAX_CONTACTOS ) {
@@ -202,12 +201,12 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos){
 	}
 	for (j = 0; j < num_contactos; j++) {
 		ap_lista_contactos--;
-		//printf ("\n1. %s\n", ap_lista_contactos->nombre);
-		//printf ("2. %s\n", ap_lista_contactos->numero);
-		//printf ("3. %s\n", ap_lista_contactos->correo);
+		//printf ("\n%d. %s\n", j, ap_lista_contactos->nombre);
+		//printf ("%d. %s\n", j, ap_lista_contactos->numero);
+		//printf ("%d. %s\n", j, ap_lista_contactos->correo);
 	}
 	fclose (ap_archivo);
-	return i;
+	return num_contactos - 1;
 }
 
 /* Codigo de la función codificar */
@@ -218,26 +217,26 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos){
 /* Codigo de la función decodificar */
 void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 	int i, j;
-	unsigned char apu;
+	unsigned char *apu;
 	for (i = 0; i < num_contactos; i++) {
 		apu = ap_lista_contactos->nombre;
 		for (j = 0; j < strlen (ap_lista_contactos->nombre); j++) {
-			*apu += 3;
-			apu++
+			*apu -= 3;
+			apu++;
 		}
-		printf ("%s", apu);
+		printf ("%s\n", apu - j);
 		apu = ap_lista_contactos->numero;
 		for (j = 0; j < strlen (ap_lista_contactos->numero); j++) {
-			*apu += 3;
-			apu++
+			*apu -= 3;
+			apu++;
 		}
-		printf ("%s", apu);
+		printf ("%s\n", apu - j);
 		apu = ap_lista_contactos->correo;
 		for (j = 0; j < strlen (ap_lista_contactos->correo); j++) {
-			*apu += 3;
-			apu++
+			*apu -= 3;
+			apu++;
 		}
-		printf ("%s", apu);
+		printf ("%s\n", apu - j);
 		ap_lista_contactos ++;
 	}
 	apu = NULL;
