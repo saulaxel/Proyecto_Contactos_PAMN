@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#define MAX_CONTACTOS 10 // Máximo número de contactos
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
 #define MAX_NUMERO 10  // del nombre, número de telefono
 #define MAX_CORREO 30  // y correo electronico
@@ -27,16 +26,14 @@
 #endif
 
 struct contacto { // Definición de la estructura "contacto"
-	unsigned char nombre[MAX_NOMBRE]; //Declaramos nombre como cadena ascii extendido
-	//unsigned char *ap_nombre = nombre;
-	unsigned char numero[MAX_NUMERO]; //numero no es ASCII extendido
-	//char *ap_numero = numero;
-	unsigned char correo[MAX_CORREO];
-	//unsigned char *ap_correo = correo;
+	unsigned char nombre[MAX_NOMBRE + 1]; //Declaramos nombre como cadena ascii
+	unsigned char numero[MAX_NUMERO + 1]; //extendido y sumamos uno para considerar
+	unsigned char correo[MAX_CORREO + 1]; //el caracter fin de linea '\0'
 };
 
 
-typedef struct contacto Contacto; // Se define un alias para "struct contacto" que será "Contacto"
+typedef struct contacto Contacto; // Se define un alias para
+					// "struct contacto" que será "Contacto"
 
 /* Declaración: presentacion : vacío -> vacío
  * Próposito: Esta función imprime nuestra portada, no toma ni devuelve nada
@@ -88,11 +85,7 @@ int borrarContacto(Contacto *,int); // Prototipo de la función "borrarContacto"
 void actualizarContacto(Contacto *, int); // Prototipo de la función "actualizarContacto" */
 
 int main (int argc, char *argv[]) {
-	setlocale (LC_ALL, "es_MX");
-	Contacto arr_lista_contactos[MAX_CONTACTOS]; // Se declara un arreglo de
-	                                              // contactos con el tamaño
-	                                              // definido en la constante
-	                                              // MAX_CONTACTOS
+	setlocale (LC_ALL, "");
 	int num_contactos = 0, seleccion = 0; // Se crea un contador de "Contactos"
 	Contacto *ap_lista_contactos = arr_lista_contactos; // apuntador a la lista de contactos
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
@@ -101,20 +94,6 @@ int main (int argc, char *argv[]) {
 	// ### Parte 1: Mensajes iniciales ###
 
 	presentacion();
-	/*
-	* ### Parte 3: Decodificar los contactos ###
-	* Como en esta sección solo se llama a la función, la persona a la que
-	* le toque esta parte solo tiene que construir el metodo de dicha función
-	* el cual se encuentra vacio actualmente
-	*/
-	//decodificar(listaContactos,numContactos);
-
-	/*
-	 * ### Parte 4: Menú ###
-	 * Hay varias funciones que son llamadas en esta sección pero
-	 * hacerlas no necesariamente es responsabilidad de la persona que crea
-	 * el menú pues son acciones independientes
-	 */
 
 	do {
 		seleccion = menu();
@@ -122,7 +101,6 @@ int main (int argc, char *argv[]) {
 		case 1:
 			printf ("Seleccionaste la opción 1\n");
 			num_contactos = leerArchivo (ap_archivo, ap_lista_contactos);
-			printf ("%d, %s\n", num_contactos, ap_lista_contactos->nombre);
 			decodificar (ap_lista_contactos, num_contactos);
 			break;
 		case 2:
@@ -172,7 +150,6 @@ int menu (void) { // damos un valor inicial a seleccion
 	printf ("\n\t3. Borrar contactos"); // tercer opción
 	printf ("\n\t4. Salir\n"); // salida del programa
 	scanf ("%d", &seleccion); // asignamos una opcion a la sección
-
 	return seleccion;
 }
 
@@ -180,33 +157,37 @@ int menu (void) { // damos un valor inicial a seleccion
 
 // función para leer los contactos del archivo
 // para una descripcion detallada, vaya a la definición
-int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos){
-	int num_contactos = 0, j = 0;
+int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
+	int num_contactos = 0, j = 0; // declaramos los contadores que usaremos
 	ap_archivo = fopen (NOMBRE_ARCHIVO, "r+"); // abrimos el archivo en
-	   // modo lectura o creación, para asegurarnos que exista, nombre provisional
-	if (ap_archivo == NULL) {
+     // modo lectura o creación, para asegurarnos que exista
+	if (ap_archivo == NULL) { // manejamos el caso en que no se pueda crear el archivo
 		printf ("\nNo se pudo leer, ni crear el archivo D:\n\t");
 		printf ("Asegurate de tener permisos suficientes para leer o escribir aquí\n");
-		exit(-1);
+		exit(-1); // salimos indicando un error al sistema operativo
 	}
-	while ( !feof(ap_archivo) && num_contactos < MAX_CONTACTOS ) {
-		fscanf(ap_archivo," %[^\t]\t%[^\t]\t%[^\n]", ap_lista_contactos->nombre,
-					 ap_lista_contactos->numero,
-					 ap_lista_contactos->correo);
-		//printf ("\n1. %s\n", ap_lista_contactos->nombre);
-		//printf ("2. %s\n", ap_lista_contactos->numero);
-		//printf ("3. %s\n", ap_lista_contactos->correo);
-		num_contactos++;
-		ap_lista_contactos++;
+	while (!feof(ap_archivo)) { // mientras no acabe el archivo
+		fscanf(ap_archivo," %50[^\t]\t%10[^\t]\t%30[^\n]\n", // este scanset toma
+		 // los valores separados con tabuladores, y solo permite espacios en la
+		 // cadena del nombre, explicado un poco más:
+		 // ' %50[^\t]' lee y guarda hasta 50 caracteres o hasta encontrar
+		 // un tabulador (sin almacenar el tabulador)
+		 // '\t' lee y descarta el tabulador
+		 // '%10[^\t]' lee y guarda hasta 10 caracteres o encontrar un tabulador,
+		 // espacio, o un salto de linea
+		 // '\t' lee y descarta el tabulador
+		 // '%30[^\n]' lee y guarda hasta 30 caracteres
+			ap_lista_contactos->nombre,// guarda la primer cadena aqui
+			ap_lista_contactos->numero, // la segunda cadena aqui
+			ap_lista_contactos->correo); // y la tercer cadena aqui
+		num_contactos++; //aumentamos el contador de contactos
+		ap_lista_contactos++; // y pasamos al siguiente elemento
 	}
 	for (j = 0; j < num_contactos; j++) {
-		ap_lista_contactos--;
-		//printf ("\n%d. %s\n", j, ap_lista_contactos->nombre);
-		//printf ("%d. %s\n", j, ap_lista_contactos->numero);
-		//printf ("%d. %s\n", j, ap_lista_contactos->correo);
+		ap_lista_contactos--; // devolvemos el apuntador apuntando al primer elemento
 	}
-	fclose (ap_archivo);
-	return num_contactos - 1;
+	fclose (ap_archivo); // limpiamos nuestra area de trabajo
+	return --num_contactos; // disminuimos y devolvemos el numero de contactos
 }
 
 /* Codigo de la función codificar */
@@ -224,19 +205,16 @@ void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 			*apu -= 3;
 			apu++;
 		}
-		printf ("%s\n", apu - j);
 		apu = ap_lista_contactos->numero;
 		for (j = 0; j < strlen (ap_lista_contactos->numero); j++) {
 			*apu -= 3;
 			apu++;
 		}
-		printf ("%s\n", apu - j);
 		apu = ap_lista_contactos->correo;
 		for (j = 0; j < strlen (ap_lista_contactos->correo); j++) {
 			*apu -= 3;
 			apu++;
 		}
-		printf ("%s\n", apu - j);
 		ap_lista_contactos ++;
 	}
 	apu = NULL;
