@@ -6,6 +6,7 @@
  * SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
  * CABRERA LÓPEZ OSCAR EMILIO
  * MENDOZA GARCÍA ULISES
+ * MARTÍNEZ ORTIZ SAÚL AXEL
  */
 
 #include <stdio.h> // Biblioteca estándar para la entrada y salida
@@ -30,11 +31,8 @@ struct contacto { // Definición de la estructura "contacto"
 	unsigned char numero[MAX_NUMERO + 1]; //extendido y sumamos uno para considerar
 	unsigned char correo[MAX_CORREO + 1]; //el caracter fin de linea '\0'
 };
-
-
 typedef struct contacto Contacto; // Se define un alias para
 					// "struct contacto" que será "Contacto"
-
 /* Declaración: presentacion : vacío -> vacío
  * Próposito: Esta función imprime nuestra portada, no toma ni devuelve nada
  * Ejemplo : presentacion();
@@ -58,7 +56,6 @@ void presentacion (void);
  */
 int menu (void);
 
-
 /* Declaración: leerArchivo : Archivo, Contactos -> numero
  * Próposito: Esta función toma como parámetros un apuntador a un archivo y un
  * apuntador a un arreglo estructuras de contacto, lee los contactos almacenados
@@ -70,8 +67,11 @@ int menu (void);
  */
 int leerArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos);
 
+
 /* void codificar(Contacto *, int ); // Prototipo de la función "codificar"
- * void escribirArchivo(FILE *, Contacto *); // Prototipo de la función "escribirArchivo"*/
+ * void escribirArchivo(FILE *, Contacto *); // Prototipo de la función "escribirArchivo"
+ */
+
 
 /*
  * Declaración: decodificar : Contactos, entero -> vacío
@@ -83,6 +83,7 @@ void decodificar(Contacto *ap_lista_contactos, int num_contactos); // Prototipo 
 /*int agregarContacto(Contacto *,int); // Prototipo de la función "agregarContacto"
 int borrarContacto(Contacto *,int); // Prototipo de la función "borrarContacto"
 void actualizarContacto(Contacto *, int); // Prototipo de la función "actualizarContacto" */
+
 
 int main (int argc, char *argv[]) {
 	setlocale (LC_ALL, "");
