@@ -89,9 +89,32 @@ void codificar(Contacto *, int );
  * Contactos, y para cada uno de los datos que contiene esta estructura, resta 3
  * al cada caracter
  */
-void decodificar(Contacto *ap_lista_contactos, int num_contactos); // Prototipo de la función "decodificar"
-/*int agregarContacto(Contacto *,int); // Prototipo de la función "agregarContacto"
+void decodificar(Contacto *ap_lista_contactos, int num_contactos); 
+
+/*
+ * Declaración: agregarContacto : Contactos, entero -> int
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y el número de contactos para añadir datos de un nuevo contacto al 
+ * final del arreglo y devuelve 1 en caso de realizar la tarea con éxito
+ * o 0 en caso contrario
+ */
+int agregarContacto(Contacto *,int);
+
+/*
+ * Declaración: borrarContacto : Contactos, entero -> int
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y el número de contactos para borrar los datos de un contacto 
+ * del arreglo y devuelve 1 en caso de realizar la tarea con éxito
+ * o 0 en caso contrario
+ */
 int borrarContacto(Contacto *,int); // Prototipo de la función "borrarContacto"
+
+/*
+ * Declaración: actualizarContacto : Contactos, entero -> vacio
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y el número de contactos para buscar un contacto elegido por el usuario 
+ * y modificar sus datos
+ */
 void actualizarContacto(Contacto *, int); // Prototipo de la función "actualizarContacto" */
 
 
@@ -133,12 +156,15 @@ int main (int argc, char *argv[]) {
 		switch (seleccion) {
 		case 1:
 			printf ("Seleccionaste la opción 1\n");
+			num_contactos += agregarContacto(ap_lista_contactos, num_contactos);
 			break;
 		case 2:
 			printf ("Seleccionaste la opción 2\n");
+			actualizarContacto(ap_lista_contactos, num_contactos);
 			break;
 		case 3:
 			printf ("Seleccionaste la opción 3\n");
+			num_contactos -= borrarContacto(ap_lista_contactos, num_contactos);
 			break;
 		case 4:
 			printf ("Seleccionaste salir\n");
@@ -274,16 +300,16 @@ void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 }
 
 /* Codigo de la función agregarContacto */
-int agregarContacto(Contacto *listaContactos,int numContactos){
+int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 }
 
 /* Codigo de la función borrarContacto */
-int borrarContacto(Contacto *listaContactos,int numContactos){
+int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 }
 
 /* Codigo de la función actualzarContacto */
-void actualizarContacto(Contacto *listaContactos,int numContactos){
+void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 }
