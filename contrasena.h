@@ -1,33 +1,33 @@
 #ifndef CONTRASENA_H_INCLUDED
 #define CONTRASENA_H_INCLUDED
-/* Biblioteca exclusiva para su uso en el proyecto de Programación
-* avanzada y metodos numéricos, la cual esta sujeta a las especificaciones
+/* Biblioteca exclusiva para su uso en el proyecto de ProgramaciÃ³n
+* avanzada y metodos numÃ©ricos, la cual esta sujeta a las especificaciones
 * de este
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#define WINDOWS 1
-
-#if WINDOWS
-#include <conio.h>
-#endif /* WINDOWS */
-
-#define DEBUG 0
+#ifdef __unix__
+	#define CLEAR "clear"
+#else
+	#define CLEAR "cls"
+	#include <conio.h>
+#endif
+#define DEBUG 1
 #define ESTANDAR 0
 #define tamDatos 17
 #define archivo_CuentaUsuario "superSecreto.secret"
-#define limpiar(x) for(i=0;i<tamDatos;++i) { x[i]=0; }
+#define limpiar(x) for(i=0;i<tamDatos;++i) x[i]=0;
 
 enum booleano{falso,verdadero};
 typedef enum booleano Booleano;
 
 void validarUsuario(void);
-void establecerLocale(void); /* Prototipo de la función establecerIdioma */
-void contrasenaDeSeguridad( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la función contrasenaDeSeguridad */
-Booleano comprobarContrasena( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la función comprobarContrasena */
-void pedirContrasena( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la función pedirContrasena */
+void establecerLocale(void); /* Prototipo de la funciÃ³n establecerIdioma */
+void contrasenaDeSeguridad( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la funciÃ³n contrasenaDeSeguridad */
+Booleano comprobarContrasena( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la funciÃ³n comprobarContrasena */
+void pedirContrasena( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la funciÃ³n pedirContrasena */
 void reparar( unsigned char *cadena );
 
 unsigned char usuario[tamDatos], contrasena[tamDatos];
@@ -35,101 +35,94 @@ FILE *datosUsuario;
 int i;
 
 #if DEBUG /* DEBUG 1*/
-int main(int argc, char *argv[]) {
+	int main(int argc, char *argv[]) {
 
-	establecerLocale();
-	validarUsuario();
+		establecerLocale();
+		validarUsuario();
 
-	return 0;
-}
+		return 0;
+	}
 #endif /* fin DEBUG 1*/
 
 void validarUsuario(){
-    contrasenaDeSeguridad( datosUsuario, usuario, contrasena );
+	contrasenaDeSeguridad( datosUsuario, usuario, contrasena );
 }
 
 void establecerLocale(){
-    #if ESTANDAR
-	setlocale(LC_ALL,"");
-    #else
-	setlocale(LC_ALL,"Spanish_Mexico");
-    #endif
+	#if ESTANDAR
+		setlocale(LC_ALL,"");
+	#else
+		setlocale(LC_ALL,"Spanish_Mexico");
+	#endif
 }
 
-void contrasenaDeSeguridad(FILE *archivo, unsigned char *user, unsigned char *pswrd ){
+void contrasenaDeSeguridad(FILE *archivo, unsigned char *user, unsigned char *pswrd ) {
 	archivo = fopen(archivo_CuentaUsuario,"r");
 
-	if (archivo == NULL){
+	if (archivo == NULL) {
 		printf("%s%s%s%s%s%s",
-			   "Parace que usted es un nuevo usuario \n",
-			   "Este sistema de seguridad para contactos \n",
-			   "lo identificará a usted con una cuenta y una \n",
-			   "contraseña estandares\n",
-               "(16 caracteres cada una)\n\n\n",
-			   "A continuación deberá ingresar una cuenta y contraseña nuevas"
-			   );
-		getchar();
+			"Parace que usted es un nuevo usuario \n",
+			"Este sistema de seguridad para contactos \n",
+			"lo identificarÃ¡ a usted con una cuenta y una \n",
+			"contraseÃ±a estandares\n",
+			"(16 caracteres cada una)\n\n\n",
+			"A continuaciÃ³n deberÃ¡ ingresar una cuenta y contraseÃ±a nuevas"
+		);
+		getchar ();
 
-		pedirContrasena(archivo,user, pswrd);
+		pedirContrasena (archivo,user, pswrd);
 
-		archivo = fopen(archivo_CuentaUsuario,"w");
+		archivo = fopen (archivo_CuentaUsuario,"w");
 		fprintf(archivo,"%s\t%s",user,pswrd);
 		fclose(archivo);
 
-		printf("\n%s%s\n",
-			   "¡¡¡Felicidades!!!",
-			   "tus contactos estarán seguros a partir de ahora"
-			   );
-		printf("Esperamos que tu experiencia con la aplicación sea grata\n\n");
-		getchar();
-	}else{
-
-		if( comprobarContrasena( archivo, user, pswrd ) == verdadero ){
-			fclose(archivo);
-			printf("\nBienvenido de vuelta %s\n\n",user);
-			getchar();
+		printf ("\n%s%s\n",
+			"Â¡Â¡Â¡Felicidades!!!",
+			" tus contactos estarÃ¡n seguros a partir de ahora"
+		);
+		printf ("Esperamos que tu experiencia con la aplicaciÃ³n sea grata\n\n");
+		getchar ();
+	} else {
+		if (comprobarContrasena (archivo, user, pswrd) == verdadero) {
+			fclose (archivo);
+			printf ("\nBienvenido de vuelta %s\n\n",user);
+			getchar ();
 		}else{
-            #if WINDOWS
-			system("cls");
-            #else
-			system("clear");
-            #endif
-			printf("\n%s\n\n\n",
-				   "¡¡¡Cuenta de usuario o contraseña incorrecta!!!");
-			printf("\t\tEl programa se cerrará\n");
+			system(CLEAR);
+			printf("\n%s\n\n\n", "Â¡Â¡Â¡Cuenta de usuario o contraseÃ±a incorrecta!!!");
+			printf("\t\tEl programa se cerrarÃ¡\n");
 			getchar();
-			exit(0);
+			exit(-1);
 		}
 	}
 }
 
-Booleano comprobarContrasena( FILE *archivo , unsigned char *user, unsigned char *pswrd ){
+Booleano comprobarContrasena (FILE *archivo , unsigned char *user, unsigned char *pswrd ) {
 	unsigned char usuarioReal[tamDatos], contrasenaReal[tamDatos];
 	int i; /* Variable contadora */
 	limpiar(usuarioReal)
-    limpiar(contrasenaReal)
+	limpiar(contrasenaReal)
 
-    fscanf(archivo," %s",usuarioReal);
+	fscanf(archivo," %s",usuarioReal);
 	fscanf(archivo," %s",contrasenaReal);
-    #if DEBUG /* DEBUG 2*/
-	printf("\nLos datos de usuario son: %s %s\n",usuarioReal,contrasenaReal);
-	getchar();
-    #endif /* Fin DEBUG 2*/
-	pedirContrasena( archivo , user, pswrd );
-
-    #if DEBUG /* DEBUG 3*/
-	printf("%s=%s\n",user,usuarioReal);
-	for(i=0;i<tamDatos;++i){
-		printf("%d ",user[i]-usuarioReal[i]);
-	}
-	putchar('\n');
-	printf("%s=%s\n",contrasenaReal,pswrd);
-	for(i=0;i<tamDatos;++i){
-		printf("%d ",pswrd[i]-contrasenaReal[i]);
-	}
-	putchar('\n');
-	getchar();
-    #endif /* Fin del DEBUG 3*/
+	#if DEBUG /* DEBUG 2*/
+		printf("\nLos datos de usuario son: %s %s\n",usuarioReal,contrasenaReal);
+		getchar();
+	#endif /* Fin DEBUG 2*/
+		pedirContrasena( archivo , user, pswrd );
+	#if DEBUG /* DEBUG 3*/
+		printf("%s=%s\n",user,usuarioReal);
+		for(i=0;i<tamDatos;++i){
+			printf("%d ",user[i]-usuarioReal[i]);
+		}
+		putchar('\n');
+		printf("%s=%s\n",contrasenaReal,pswrd);
+		for(i=0;i<tamDatos;++i){
+			printf("%d ",pswrd[i]-contrasenaReal[i]);
+		}
+		putchar('\n');
+		getchar();
+	#endif /* Fin del DEBUG 3*/
 
 	for( i = 0 ; i < tamDatos-1 ; ++i){
 		if ( (usuarioReal[i]!=user[i]) || (contrasenaReal[i]!=pswrd[i]) ){
@@ -142,231 +135,217 @@ Booleano comprobarContrasena( FILE *archivo , unsigned char *user, unsigned char
 
 void pedirContrasena( FILE *archivo , unsigned char *user , unsigned char *pswrd ){
 	unsigned char c = 100;
-	short m = 0, n; /* Dos variables contadoras que se usan para pedir datos */
+	short int m = 0, n; /* Dos variables contadoras que se usan para pedir datos */
 
 	limpiar(usuario)
 	limpiar(contrasena)
-
-    #if WINDOWS
-	system("cls");
-    #else
-	system("clear");
-    #endif
+	system(CLEAR);
 
 	printf("Por favor ingrese su cuenta de usuario:\n");
 	scanf(" %s",usuario);
+	system (CLEAR);
 
-    #if WINDOWS
-	system("cls");
-    #else
-	system("clear");
-    #endif
-
-	printf("Por favor ingrese su contraseña");
-    #if  WINDOWS
-    printf(":\n");
-    #else
-    printf(" letra por letra:\n");
-    #endif
+	printf("Por favor ingrese su contraseÃ±a");
+	#if  WINDOWS
+		printf(":\n");
+	#else
+		printf(" letra por letra:\n");
+	#endif
 
 	getchar();
 
-    #if  WINDOWS
-	c = getch();
-    #else
-	c = getchar();
-	getchar();
-    #endif
+	#if  WINDOWS
+		c = getch();
+	#else
+		c = getchar();
+		getchar();
+	#endif
 
 	while( c != '\n' && c != '\t' && c != ' ' && c != '\r' && m < tamDatos-1 ){
-    #if ESTANDAR
-    if ( c > 127 ){
-        do{
-            printf("\nCaracter invalido, remplacelo por otro:\n");
-            #if WINDOWS
-            c = getch();
-            #else
-            c = getchar();
-            getchar();
-            #endif
-        }while ( c > 127 );
-    }
-    #endif /* Fin ESTANDAR */
+	#if ESTANDAR
+		if ( c > 127 ){
+			do{
+				printf("\nCaracter invalido, remplacelo por otro:\n");
+				#if WINDOWS
+				c = getch();
+				#else
+				c = getchar();
+				getchar();
+				#endif
+			}while ( c > 127 );
+		}
+	#endif /* Fin ESTANDAR */
 
-    #if  WINDOWS
-	system("cls");
-    #else
-	system("clear");
-    #endif
+	system(CLEAR);
 
-    if( c != 127 && c != 8 ){
-        contrasena[m] = c;
+	if( c != 127 && c != 8 ){
+		contrasena[m] = c;
 		++m;
-    }else{
+	}else{
 		--m;
-    }
+	}
 
-    printf("Por favor ingrese su contraseña");
-    #if  WINDOWS
-    printf(":\n");
-    #else
-    printf(" letra por letra:\n");
-    #endif
-    for( n = 1 ; n <= m ; ++n ){
-        putchar('*');
-    }
+	printf("Por favor ingrese su contraseÃ±a");
+	#if _WIN32
+		printf(":\n");
+	#else
+		printf(" letra por letra:\n");
+	#endif
+	for( n = 1 ; n <= m ; ++n ){
+		putchar('*');
+	}
 
-    #if WINDOWS
-    c = getch();
-    #else
-    c = getchar();
-    getchar();
-    #endif
+	#if _WIN32
+		c = getch();
+	#else
+		c = getchar();
+		getchar();
+	#endif
 
 	}
 	contrasena[m] = '\0';
 
-    reparar( usuario );
-    reparar( contrasena );
+	reparar( usuario );
+	reparar( contrasena );
 
-    #if DEBUG
-	printf("\n%s %s\n",usuario,contrasena);
-	getchar();
-    #endif /* DEBUG */
+	#if DEBUG
+		printf("\n%s %s\n",usuario,contrasena);
+		getchar();
+	#endif /* DEBUG */
 }
 
 
 void reparar( unsigned char *cadena ){
-    short n;
+	short int n;
 	unsigned char a[128];
-	a[0] = 'Ç';
-	a[1] = 'ü';
-	a[2] = 'é';
-	a[3] = 'â';
-	a[4] = 'ä';
-	a[5] = 'à';
-	a[6] = 'å';
-	a[7] = 'ç';
-	a[8] = 'ê';
-	a[9] = 'ë';
-	a[10] = 'è';
-	a[11] = 'ï';
-	a[12] = 'î';
-	a[13] = 'ì';
-	a[14] = 'Ä';
-	a[15] = 'Å';
-	a[16] = 'É';
-	a[17] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[18] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[19] = 'ô';
-	a[20] = 'ö';
-	a[21] = 'ò';
-	a[22] = 'û';
-	a[23] = 'ù';
-	a[24] = 'ÿ';
-	a[25] = 'Ö';
-	a[26] = 'Ü';
-	a[27] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[28] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[29] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[30] = '×';
-	a[31] = 'ƒ';
-	a[32] = 'á';
-	a[33] = 'í';
-	a[34] = 'ó';
-	a[35] = 'ú';
-	a[36] = 'ñ';
-	a[37] = 'Ñ';
-	a[38] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[39] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[40] = '¿';
-	a[41] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[42] = '¬';
-	a[43] = '½';
-	a[44] = '¼';
-	a[45] = '¡';
-	a[46] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[47] = 'Á';
-	a[48] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[49] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[50] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[51] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[52] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[53] = 'Á';
-	a[54] = 'Â';
-	a[55] = 'À';
-	a[56] = '©';
-	a[57] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[58] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[59] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[60] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[61] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[62] = '¥';
-	a[63] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[64] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[65] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[66] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[67] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[68] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[69] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[70] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[71] = 'Ã';
-	a[72] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[73] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[74] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[75] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[76] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[77] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[78] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[79] = '¤';
-	a[80] = 'ð';
-	a[81] = 'Ð';
-	a[82] = 'Ê';
-	a[83] = 'Ë';
-	a[84] = 'È';
-	a[85] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[86] = 'Í';
-	a[87] = 'Î';
-	a[88] = 'Ï';
-	a[89] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[90] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[91] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[92] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[93] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[94] = 'Ì';
-	a[95] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[96] = 'Ó';
-	a[97] = 'ß';
-	a[98] = 'Ô';
-	a[99] = 'Ò';
-	a[100] = 'õ';
-	a[101] = 'Õ';
-	a[102] = 'µ';
-	a[103] = 'þ';
-	a[104] = 'Þ';
-	a[105] = 'Ú';
-	a[106] = 'Û';
-	a[107] = 'Ù';
-	a[108] = 'ý';
-	a[109] = 'Ý';
-	a[110] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[111] = '´';
-	a[112] = '­';
-	a[113] = '±';
-	a[114] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[115] = '¾';
-	a[116] = '¶';
-	a[117] = '§';
-	a[118] = '÷';
-	a[119] = '¸';
-	a[120] = '°';
-	a[121] = '¨';
-	a[122] = '·';
-	a[123] = '¹';
-	a[124] = '³';
-	a[125] = '²';
-	a[126] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
-	a[127] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
+	a[0] = 'Ã‡';
+	a[1] = 'Ã¼';
+	a[2] = 'Ã©';
+	a[3] = 'Ã¢';
+	a[4] = 'Ã¤';
+	a[5] = 'Ã ';
+	a[6] = 'Ã¥';
+	a[7] = 'Ã§';
+	a[8] = 'Ãª';
+	a[9] = 'Ã«';
+	a[10] = 'Ã¨';
+	a[11] = 'Ã¯';
+	a[12] = 'Ã®';
+	a[13] = 'Ã¬';
+	a[14] = 'Ã„';
+	a[15] = 'Ã…';
+	a[16] = 'Ã‰';
+	a[17] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[18] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[19] = 'Ã´';
+	a[20] = 'Ã¶';
+	a[21] = 'Ã²';
+	a[22] = 'Ã»';
+	a[23] = 'Ã¹';
+	a[24] = 'Ã¿';
+	a[25] = 'Ã–';
+	a[26] = 'Ãœ';
+	a[27] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[28] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[29] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[30] = 'Ã—';
+	a[31] = 'Âƒ';
+	a[32] = 'Ã¡';
+	a[33] = 'Ã­';
+	a[34] = 'Ã³';
+	a[35] = 'Ãº';
+	a[36] = 'Ã±';
+	a[37] = 'Ã‘';
+	a[38] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[39] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[40] = 'Â¿';
+	a[41] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[42] = 'Â¬';
+	a[43] = 'Å“';
+	a[44] = 'Å’';
+	a[45] = 'Â¡';
+	a[46] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[47] = 'Ã';
+	a[48] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[49] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[50] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[51] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[52] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[53] = 'Ã';
+	a[54] = 'Ã‚';
+	a[55] = 'Ã€';
+	a[56] = 'Â©';
+	a[57] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[58] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[59] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[60] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[61] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[62] = 'Â¥';
+	a[63] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[64] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[65] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[66] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[67] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[68] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[69] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[70] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[71] = 'Ãƒ';
+	a[72] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[73] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[74] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[75] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[76] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[77] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[78] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[79] = 'â‚¬';
+	a[80] = 'Ã°';
+	a[81] = 'Ã';
+	a[82] = 'ÃŠ';
+	a[83] = 'Ã‹';
+	a[84] = 'Ãˆ';
+	a[85] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[86] = 'Ã';
+	a[87] = 'ÃŽ';
+	a[88] = 'Ã';
+	a[89] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[90] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[91] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[92] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[93] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[94] = 'ÃŒ';
+	a[95] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[96] = 'Ã“';
+	a[97] = 'ÃŸ';
+	a[98] = 'Ã”';
+	a[99] = 'Ã’';
+	a[100] = 'Ãµ';
+	a[101] = 'Ã•';
+	a[102] = 'Âµ';
+	a[103] = 'Ã¾';
+	a[104] = 'Ãž';
+	a[105] = 'Ãš';
+	a[106] = 'Ã›';
+	a[107] = 'Ã™';
+	a[108] = 'Ã½';
+	a[109] = 'Ã';
+	a[110] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[111] = 'Å½';
+	a[112] = 'Â­';
+	a[113] = 'Â±';
+	a[114] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[115] = 'Å¸';
+	a[116] = 'Â¶';
+	a[117] = 'Â§';
+	a[118] = 'Ã·';
+	a[119] = 'Å¾';
+	a[120] = 'Â°';
+	a[121] = 'Å¡';
+	a[122] = 'Â·';
+	a[123] = 'Â¹';
+	a[124] = 'Â³';
+	a[125] = 'Â²';
+	a[126] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
+	a[127] = 'a'; /* Caracter no valido para contraseÃ±as en este proyecto, se remplaza por a */
 
 	for( n=0 ; (cadena[n] || n < tamDatos -1) ; ++n ){
 		if (cadena[n]>=128){

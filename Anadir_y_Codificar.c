@@ -17,13 +17,10 @@
 #define MAX_NUMERO 10  // del nombre, número de telefono
 #define MAX_CORREO 30  // y correo electronico
 #define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
-#ifdef _WIN32
-	#define CLEAR "cls"
-	#ifdef _WIN64
-		#define CLEAR "cls"
-	#endif
-#else
+#ifdef __unix__
 	#define CLEAR "clear"
+#else
+	#define CLEAR "cls"
 #endif
 
 struct contacto { // Definición de la estructura "contacto"
