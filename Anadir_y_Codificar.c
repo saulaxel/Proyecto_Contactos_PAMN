@@ -173,9 +173,11 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	ap_archivo = fopen (NOMBRE_ARCHIVO, "r+"); // abrimos el archivo en
      // modo lectura o creación, para asegurarnos que exista
 	if (ap_archivo == NULL) { // manejamos el caso en que no se pueda crear el archivo
-		printf ("\nNo se pudo leer, ni crear el archivo D:\n\t");
-		printf ("Asegurate de tener permisos suficientes para leer o escribir aquí\n");
-		exit(-1); // salimos indicando un error al sistema operativo
+		return 0; // Si el archivo no está trabajaremos en blanco por lo que se 
+			  // devuelve 0 y los contactos se irán creando conforme al usuario
+		//printf ("\nNo se pudo leer, ni crear el archivo D:\n\t");
+		//printf ("Asegurate de tener permisos suficientes para leer o escribir aquí\n");
+		//exit(-1); // salimos indicando un error al sistema operativo
 	}
 	while (!feof(ap_archivo)) { // mientras no acabe el archivo
 		fscanf(ap_archivo," %50[^\t]\t%10[^\t]\t%30[^\t]\t%3[^\n]\n", // este scanset toma
