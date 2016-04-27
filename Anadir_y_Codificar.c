@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#define MAX_CONTACTOS 10 // Solo para pruebas volvi a declarar un arreglo estatico al inicio
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
 #define MAX_NUMERO 10  // del nombre, número de telefono,
 #define MAX_CORREO 30  // correo electronico,
@@ -90,6 +91,7 @@ void actualizarContacto(Contacto *, int); // Prototipo de la función "actualiza
 int main (int argc, char *argv[]) {
 	setlocale (LC_ALL, "");
 	int num_contactos = 0, seleccion = 0; // Se crea un contador de "Contactos"
+	Contacto arr_lista_contactos[MAX_CONTACTOS];
 	Contacto *ap_lista_contactos = arr_lista_contactos; // apuntador a la lista de contactos
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
 	                         // abierto, lo iniciamos en NULL por seguridad
