@@ -77,6 +77,8 @@ int leerArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos);
  * cada uno de los datos de los mismos sumandole 3 al codigo de sus caracteres
  */
 void codificar(Contacto *, int );
+
+
  //void escribirArchivo(FILE *, Contacto *); // Prototipo de la función "escribirArchivo"
  //
  
@@ -211,7 +213,7 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 }
 
 /* Codigo de la función codificar */
-void decodificar(Contacto *ap_lista_contactos, int num_contactos){
+void codificar(Contacto *ap_lista_contactos, int num_contactos){
 	int i, j;
 	unsigned char *apu;
 	for (i = 0; i < num_contactos; i++) {
