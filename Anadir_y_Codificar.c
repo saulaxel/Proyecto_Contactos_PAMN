@@ -113,8 +113,21 @@ int main (int argc, char *argv[]) {
 	 * el cual se encuentra vacio actualmente
 	 */
 	num_contactos = leerArchivo(ap_archivo,ap_lista_contactos);
+	
+	/* 
+	* ### Parte 3: Decodificar los contactos ### 
+	* Como en esta sección solo se llama a la función, la persona a la que
+	* le toque esta parte solo tiene que construir el metodo de dicha función
+	* el cual se encuentra vacio actualmente
+	*/
 	decodificar (ap_lista_contactos, num_contactos);
 
+	/* 
+	 * ### Parte 4: Menú ###
+	 * Hay varias funciones que son llamadas en esta sección pero
+	 * hacerlas no necesariamente es responsabilidad de la persona que crea
+	 * el menú pues son acciones independientes
+	 */
 	do {
 		seleccion = menu();
 		switch (seleccion) {
@@ -156,8 +169,14 @@ void presentacion () {
 	printf ("#                  Proyecto 1                 #\n");
 	printf ("#          Cabrera López Oscar Emilio         #\n");
 	printf ("#             Mendoza García Ulises           #\n");
+	printf ("#       Sierra González Héctor Alejandro      #\n");
+	printf ("#           Martínez Ortiz Saúl Axel          #\n");
 	printf ("###############################################\n\n");
 }
+ * SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
+ * CABRERA LÓPEZ OSCAR EMILIO
+ * MENDOZA GARCÍA ULISES
+ * MARTÍNEZ ORTIZ SAÚL AXEL
 
 // funcion de presentacion, para más informacion ir a la declaración
 int menu (void) { // damos un valor inicial a seleccion
