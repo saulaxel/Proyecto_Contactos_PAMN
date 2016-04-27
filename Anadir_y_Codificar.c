@@ -70,10 +70,15 @@ int menu (void);
  */
 int leerArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos);
 
-
-/* void codificar(Contacto *, int ); // Prototipo de la función "codificar"
- * void escribirArchivo(FILE *, Contacto *); // Prototipo de la función "escribirArchivo"
+/*
+ * Declaración: codificar : Contactos, entero -> vacío
+ * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
+ * Contactos y un entero que indica el número de los mismos, para despues recorrer
+ * cada uno de los datos de los mismos sumandole 3 al codigo de sus caracteres
  */
+void codificar(Contacto *, int );
+ //void escribirArchivo(FILE *, Contacto *); // Prototipo de la función "escribirArchivo"
+ //
  
 
 /*
@@ -206,46 +211,62 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 }
 
 /* Codigo de la función codificar */
-// void codificar(Contacto *listaContactos, int numContactos){
-
-// }
+void decodificar(Contacto *ap_lista_contactos, int num_contactos){
+	int i, j;
+	unsigned char *apu;
+	for (i = 0; i < num_contactos; i++) {
+		apu = (ap_lista_contactos+i)->nombre;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->nombre); j++) {
+			*apu += 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos+i)->numero;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->numero); j++) {
+			*apu += 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos+i)->correo;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->correo); j++) {
+			*apu += 3;
+			apu++;
+		}
+	}
+}
 
 /* Codigo de la función decodificar */
 void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 	int i, j;
 	unsigned char *apu;
 	for (i = 0; i < num_contactos; i++) {
-		apu = ap_lista_contactos->nombre;
-		for (j = 0; j < strlen (ap_lista_contactos->nombre); j++) {
+		apu = (ap_lista_contactos+i)->nombre;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->nombre); j++) {
 			*apu -= 3;
 			apu++;
 		}
-		apu = ap_lista_contactos->numero;
-		for (j = 0; j < strlen (ap_lista_contactos->numero); j++) {
+		apu = (ap_lista_contactos+i)->numero;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->numero); j++) {
 			*apu -= 3;
 			apu++;
 		}
-		apu = ap_lista_contactos->correo;
-		for (j = 0; j < strlen (ap_lista_contactos->correo); j++) {
+		apu = (ap_lista_contactos+i)->correo;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->correo); j++) {
 			*apu -= 3;
 			apu++;
 		}
-		ap_lista_contactos ++;
 	}
-	apu = NULL;
 }
 
 /* Codigo de la función agregarContacto */
-// int agregarContacto(Contacto *listaContactos,int numContactos){
+int agregarContacto(Contacto *listaContactos,int numContactos){
 
-// }
+}
 
 /* Codigo de la función borrarContacto */
-// int borrarContacto(Contacto *listaContactos,int numContactos){
+int borrarContacto(Contacto *listaContactos,int numContactos){
 
-// }
+}
 
 /* Codigo de la función actualzarContacto */
-// void actualizarContacto(Contacto *listaContactos,int numContactos){
+void actualizarContacto(Contacto *listaContactos,int numContactos){
 
-// }
+}
