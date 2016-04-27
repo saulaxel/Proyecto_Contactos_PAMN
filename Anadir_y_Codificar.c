@@ -173,10 +173,6 @@ void presentacion () {
 	printf ("#           Martínez Ortiz Saúl Axel          #\n");
 	printf ("###############################################\n\n");
 }
- * SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
- * CABRERA LÓPEZ OSCAR EMILIO
- * MENDOZA GARCÍA ULISES
- * MARTÍNEZ ORTIZ SAÚL AXEL
 
 // funcion de presentacion, para más informacion ir a la declaración
 int menu (void) { // damos un valor inicial a seleccion
