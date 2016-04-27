@@ -95,16 +95,22 @@ int main (int argc, char *argv[]) {
 	                         // abierto, lo iniciamos en NULL por seguridad
 
 	// ### Parte 1: Mensajes iniciales ###
-
 	presentacion();
+	
+	/* 
+	 * ### Parte 2: Leer los contactos existentes ### 
+	 * Como en esta sección solo se llama a la función, la persona a la que
+	 * le toque esta parte solo tiene que construir el metodo de dicha función
+	 * el cual se encuentra vacio actualmente
+	 */
+	numContactos = leerArchivo(aptdrArchivo,listaContactos);
+	decodificar (ap_lista_contactos, num_contactos);
 
 	do {
 		seleccion = menu();
 		switch (seleccion) {
 		case 1:
 			printf ("Seleccionaste la opción 1\n");
-			num_contactos = leerArchivo (ap_archivo, ap_lista_contactos);
-			decodificar (ap_lista_contactos, num_contactos);
 			break;
 		case 2:
 			printf ("Seleccionaste la opción 2\n");
