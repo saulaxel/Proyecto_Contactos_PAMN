@@ -105,7 +105,7 @@ int main (int argc, char *argv[]) {
 	 * le toque esta parte solo tiene que construir el metodo de dicha función
 	 * el cual se encuentra vacio actualmente
 	 */
-	num_contactos = leerArchivo(ap_archivo,listaContactos);
+	num_contactos = leerArchivo(ap_archivo,ap_lista_contactos);
 	decodificar (ap_lista_contactos, num_contactos);
 
 	do {
