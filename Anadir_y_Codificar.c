@@ -14,8 +14,9 @@
 #include <string.h>
 #include <locale.h>
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
-#define MAX_NUMERO 10  // del nombre, número de telefono
-#define MAX_CORREO 30  // y correo electronico
+#define MAX_NUMERO 10  // del nombre, número de telefono,
+#define MAX_CORREO 30  // correo electronico,
+#define MAX_NUMCASA 3  // y numero de casa
 #define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
 #ifdef _WIN32
 	#define CLEAR "cls"
@@ -30,6 +31,7 @@ struct contacto { // Definición de la estructura "contacto"
 	unsigned char nombre[MAX_NOMBRE + 1]; //Declaramos nombre como cadena ascii
 	unsigned char numero[MAX_NUMERO + 1]; //extendido y sumamos uno para considerar
 	unsigned char correo[MAX_CORREO + 1]; //el caracter fin de linea '\0'
+	unsigned char numcasa[MAX_NUMCASA + 1];
 };
 typedef struct contacto Contacto; // Se define un alias para
 					// "struct contacto" que será "Contacto"
@@ -168,7 +170,7 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 		exit(-1); // salimos indicando un error al sistema operativo
 	}
 	while (!feof(ap_archivo)) { // mientras no acabe el archivo
-		fscanf(ap_archivo," %50[^\t]\t%10[^\t]\t%30[^\n]\n", // este scanset toma
+		fscanf(ap_archivo," %50[^\t]\t%10[^\t]\t%30[^\t]\t%3[^\n]\n", // este scanset toma
 		 // los valores separados con tabuladores, y solo permite espacios en la
 		 // cadena del nombre, explicado un poco más:
 		 // ' %50[^\t]' lee y guarda hasta 50 caracteres o hasta encontrar
@@ -177,10 +179,12 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 		 // '%10[^\t]' lee y guarda hasta 10 caracteres o encontrar un tabulador,
 		 // espacio, o un salto de linea
 		 // '\t' lee y descarta el tabulador
-		 // '%30[^\n]' lee y guarda hasta 30 caracteres
+		 // '%30[^\t]' lee y guarda hasta 30 caracteres o encontrar un tabulador
+		 // '%3[^\n]' lee y guarda hasta 3 caracteres o un salto de linea
 			ap_lista_contactos->nombre,// guarda la primer cadena aqui
 			ap_lista_contactos->numero, // la segunda cadena aqui
-			ap_lista_contactos->correo); // y la tercer cadena aqui
+			ap_lista_contactos->correo, // la tercer cadena aqui
+			ap_lista_contactos->numcasa); // y la cuarta aquí
 		num_contactos++; //aumentamos el contador de contactos
 		ap_lista_contactos++; // y pasamos al siguiente elemento
 	}
