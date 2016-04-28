@@ -315,22 +315,21 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned short no_numero = 0, arroba = 0 , punto = 0, ascii_ext = 0;
 	unsigned char *ap_c;
 	if( num_contactos < MAX_CONTACTOS ){
-		printf("Ingrese el nombre del nuevo contacto");
+		printf("Ingrese el nombre del nuevo contacto\n");
 		scanf(" %50[^\n]", (ap_lista_contactos+num_contactos)->nombre);
 		
-		printf("Ingrese el número del nuevo contacto");
-		scanf(" %10[^\n]", (ap_lista_contactos+num_contactos)->numero);
+		printf("Ingrese el número del nuevo contacto\n");
+		scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
 		ap_c = (ap_lista_contactos+num_contactos)->numero;
 		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
 			if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
 				no_numero = 1;
 			}
 		}
-		
 		while( no_numero ){
 			no_numero = 0;
 			printf("Caracteres invalidos para un número de telefono. Vuelva a teclear el número\n");
-			scanf(" %10[^\n]", (ap_lista_contactos+num_contactos)->numero);
+			scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
 			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
 				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
 					no_numero = 1;
@@ -338,8 +337,8 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 			}
 		}
 		
-		printf("Ingrese el correo del nuevo contacto");
-		scanf(" %30[^\n]", (ap_lista_contactos+num_contactos)->correo);
+		printf("Ingrese el correo del nuevo contacto\n");
+		scanf(" %30s", (ap_lista_contactos+num_contactos)->correo);
 		ap_c = (ap_lista_contactos+num_contactos)->correo;
 		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
 			if( *( ap_c + i ) == 64 ){
@@ -355,7 +354,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		while( !(arroba && punto) || ascii_ext ){
 			arroba = 0; punto = 0; ascii_ext = 0;
 			printf("Formato invalido para correo, favor de volver a escribirlo\n");
-			scanf(" %30[^\n]", (ap_lista_contactos+num_contactos)->correo);
+			scanf(" %30s", (ap_lista_contactos+num_contactos)->correo);
 			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
 				if( *( ap_c + i ) == 64 ){
 					arroba = 1;
@@ -370,19 +369,18 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		
 		}
 		
-		printf("Ingrese el numero de casa del nuevo contacto");
-		scanf(" %3[^\n]", (ap_lista_contactos+num_contactos)->numcasa);
+		printf("Ingrese el número de casa del nuevo contacto\n");
+		scanf(" %3s", (ap_lista_contactos+num_contactos)->numcasa);
 		ap_c = (ap_lista_contactos+num_contactos)->numcasa;
 		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numcasa); i++) {
 			if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
 				no_numero = 1;
 			}
 		}
-		
 		while( no_numero ){
 			no_numero = 0;
 			printf("Caracteres invalidos para un número de casa. Vuelva a teclear el número\n");
-			scanf(" %3[^\n]", (ap_lista_contactos+num_contactos)->numero);
+			scanf(" %3s", (ap_lista_contactos+num_contactos)->numero);
 			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
 				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
 					no_numero = 1;
