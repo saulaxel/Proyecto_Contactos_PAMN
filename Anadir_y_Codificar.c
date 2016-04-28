@@ -319,7 +319,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		printf("Ingrese el nombre del nuevo contacto\n");
 		scanf(" %50[^\n]", (ap_lista_contactos+num_contactos)->nombre);
 		#ifdef _WIN32
-		repara((ap_lista_contactos+num_contactos)->nombre);
+		reparar((ap_lista_contactos+num_contactos)->nombre);
 		#endif //_WIN32
 		
 		printf("Ingrese el número del nuevo contacto\n");
