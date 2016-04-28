@@ -273,6 +273,11 @@ void codificar(Contacto *ap_lista_contactos, int num_contactos){
 			*apu += 3;
 			apu++;
 		}
+		apu = (ap_lista_contactos+i)->numcasa;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->numcasa); j++) {
+			*apu += 3;
+			apu++;
+		}
 	}
 }
 
@@ -296,17 +301,103 @@ void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 			*apu -= 3;
 			apu++;
 		}
+		apu = (ap_lista_contactos+i)->numcasa;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->numcasa); j++) {
+			*apu -= 3;
+			apu++;
+		}
 	}
 }
 
 /* Codigo de la función agregarContacto */
 int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
-
+	int i;
+	unsigned short no_numero = 0, arroba = 0 , punto = 0, ascii_ext = 0;
+	unsigned char *ap_c;
+	if( num_contactos < MAX_CONTACTOS ){
+		printf("Ingrese el nombre del nuevo contacto");
+		scanf(" %50[^\n]", (ap_lista_contactos+num_contactos)->nombre);
+		
+		printf("Ingrese el número del nuevo contacto");
+		scanf(" %10[^\n]", (ap_lista_contactos+num_contactos)->numero);
+		ap_c = (ap_lista_contactos+num_contactos)->numero;
+		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); j++) {
+			if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+				no_numero = 1;
+			}
+		}
+		
+		while( no_numero ){
+			no_numero = 0;
+			printf("Caracteres invalidos para un número de telefono. Vuelva a teclear el número\n");
+			scanf(" %10[^\n]", (ap_lista_contactos+num_contactos)->numero);
+			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); j++) {
+				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+					no_numero = 1;
+				}
+			}
+		}
+		
+		printf("Ingrese el correo del nuevo contacto");
+		scanf(" %30[^\n]", (ap_lista_contactos+num_contactos)->correo);
+		ap_c = (ap_lista_contactos+num_contactos)->correo;
+		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); j++) {
+			if( *( ap_c + i ) == 64 ){
+				arroba = 1;
+			}
+			if( *( ap_c + i ) == 46){
+				punto = 1;
+			}
+			if( *( ap_c + i ) > 128 ){
+				ascii_ext = 1;
+			}
+		}
+		while( !(arroba && punto) || ascii_ext ){
+			arroba = 0; punto = 0; ascii_ext = 0;
+			printf("Formato invalido para correo, favor de volver a escribirlo\n");
+			scanf(" %30[^\n]", (ap_lista_contactos+num_contactos)->correo);
+			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); j++) {
+				if( *( ap_c + i ) == 64 ){
+					arroba = 1;
+				}
+				if( *( ap_c + i ) == 46){
+					punto = 1;
+				}
+				if( *( ap_c + i ) > 128 ){
+					ascii_ext = 1;
+				}
+			}
+		
+		}
+		
+		printf("Ingrese el numero de casa del nuevo contacto");
+		scanf(" %3[^\n]", (ap_lista_contactos+num_contactos)->numcasa);
+		ap_c = (ap_lista_contactos+num_contactos)->numcasa;
+		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numcasa); j++) {
+			if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+				no_numero = 1;
+			}
+		}
+		
+		while( no_numero ){
+			no_numero = 0;
+			printf("Caracteres invalidos para un número de casa. Vuelva a teclear el número\n");
+			scanf(" %3[^\n]", (ap_lista_contactos+num_contactos)->numero);
+			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); j++) {
+				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+					no_numero = 1;
+				}
+			}
+		}
+		return 1;
+	}else{
+		return 0;	
+	}
 }
 
 /* Codigo de la función borrarContacto */
 int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
-
+	return 0;
 }
 
 /* Codigo de la función actualzarContacto */
