@@ -21,6 +21,7 @@
 #define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
 #ifdef _WIN32
 	#define CLEAR "cls"
+	#include "contrasena.h"
 	#ifdef _WIN64
 		#define CLEAR "cls"
 	#endif
@@ -317,6 +318,9 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	if( num_contactos < MAX_CONTACTOS ){
 		printf("Ingrese el nombre del nuevo contacto\n");
 		scanf(" %50[^\n]", (ap_lista_contactos+num_contactos)->nombre);
+		#ifdef _WIN32
+		repara((ap_lista_contactos+num_contactos)->nombre);
+		#endif //_WIN32
 		
 		printf("Ingrese el número del nuevo contacto\n");
 		scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
