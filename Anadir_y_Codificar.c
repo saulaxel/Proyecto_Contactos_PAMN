@@ -117,7 +117,15 @@ int borrarContacto(Contacto *,int); // Prototipo de la función "borrarContacto"
  * y modificar sus datos
  */
 void actualizarContacto(Contacto *, int); // Prototipo de la función "actualizarContacto" */
-
+buscar(ap_lista_contactos, ap_nombre)
+/* 
+ * Declaración: buscar : Contactos, cadena -> entero
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y una cadena que buscara entre los datos "nombre" del arreglo de 
+ * contactos para devolver la posicón de dicho nombre en el arreglo 
+ * (en caso de encontrarlo) o devolver -1 si no se encuentra.
+ */
+int buscar(Contacto * ,unsigned char *);
 
 int main (int argc, char *argv[]) {
 	setlocale (LC_ALL, "");
@@ -393,16 +401,60 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 		return 1;
 	}else{
+		printf("Número de contactos maximo excedido\n");
 		return 0;	
 	}
 }
 
 /* Codigo de la función borrarContacto */
 int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
-	return 0;
+	unsigned char *ap_nombre;
+	int posicion;
+	
+	if( num_contactos = MAX_CONTACTOS ){
+		printf("No hay contactos a sacar\n");
+		return 0;
+	}else{
+		printf("Ingrese el nombre del contacto que desea borrar\n");
+		scanf(" %50[^\n]",ap_nombre);
+		if( (posicion = buscar(ap_lista_contactos, ap_nombre) ) == -1 ){
+			printf("Contacto no encontrado\n");
+			return 0;
+		}else{
+			int i; // Contador para el ciclo
+			for( i = posicion , i < MAX_CONTACTOS - 2 , ++i ){
+				strcpy( (ap_lista_contactos + i)->nombre, (ap_lista_contactos + i + 1)->nombre );
+				strcpy( (ap_lista_contactos + i)->numero, (ap_lista_contactos + i + 1)->numero );
+				strcpy( (ap_lista_contactos + i)->correo, (ap_lista_contactos + i + 1)->correo );
+				strcpy( (ap_lista_contactos + i)->numcasa, (ap_lista_contactos + i + 1)->numcasa );
+			}
+			
+			memset( (ap_lista_contactos + i)->nombre, '\0', 50 );
+			memset( (ap_lista_contactos + i)->numero, '\0', 10 );
+			memset( (ap_lista_contactos + i)->correo, '\0', 30 );
+			memset( (ap_lista_contactos + i)->numcasa, '\0', 3 );
+			
+			printf("Contacto borrado exitosamente\n");
+			return 1;
+		}
+	}
 }
 
 /* Codigo de la función actualzarContacto */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
+}
+
+// Codigo de la función buscar (contacto)
+int buscar(Contacto *ap_lista_contactos, unsigned char* ap_nombre){
+	int c = 0; // contador para el ciclo
+	int pos = -1; // Variable para guardar la posición del contacto
+	
+	while( c < MAX_CONTACTOS && (pos == -1) ){
+		if( strcmp( (ap_lista_contactos+c)->nombre, ap_nombre) == 0 ){
+			pos = c;
+		)
+		++c;
+	}
+	return pos;
 }
