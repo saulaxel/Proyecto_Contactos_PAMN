@@ -481,7 +481,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 				printf("Caracteres invalidos para un número de telefono. Vuelva a teclear el número\n");
 				scanf(" %10s", ap_cadena);
 				for (i = 0; i < strlen( ap_cadena ); ++i) {
-					if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+					if( *( ap_cadena + i ) < 48 || *( ap_cadena + i ) > 57 ){
 						no_numero = 1;
 					}
 				}
