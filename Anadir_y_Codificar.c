@@ -221,8 +221,8 @@ void presentacion () {
 int menu (void) { // damos un valor inicial a seleccion
 	int seleccion;
 	printf ("\n\t\tBienvenido. \n\t Elige una opción:"); // peticion al usuario
-	printf ("\n\t1. Añadir contacto: "); // primer opción
-	printf ("\n\t2. Actualizar contactos"); // segunda opción
+	printf ("\n\t1. Añadir contacto "); // primer opción
+	printf ("\n\t2. Actualizar contacto"); // segunda opción
 	printf ("\n\t3. Borrar contactos"); // tercer opción
 	printf ("\n\t4. Salir\n"); // salida del programa
 	scanf ("%d", &seleccion); // asignamos una opcion a la sección
@@ -267,7 +267,7 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 		ap_lista_contactos--; // devolvemos el apuntador apuntando al primer elemento
 	}
 	fclose (ap_archivo); // limpiamos nuestra area de trabajo
-	return --num_contactos; // disminuimos y devolvemos el numero de contactos
+	return num_contactos; // disminuimos y devolvemos el numero de contactos
 }
 
 /* Codigo de la función codificar */
