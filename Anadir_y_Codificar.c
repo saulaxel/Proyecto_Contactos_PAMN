@@ -198,6 +198,9 @@ int main (int argc, char *argv[]) {
 	} while ( seleccion );
 
 	/* ### Parte 5: Mensaje de despedida ### */
+	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
+	printf("\tRegresa pronto :)");
+	
 	return 0;
 }
 
