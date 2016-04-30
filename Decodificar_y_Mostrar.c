@@ -1,7 +1,7 @@
 /*
  * Primer Proyecto Programación Avanzada y metodos numéricos
  * "Sistema de seguridad para contactos"
- * Parte 1: Añadir contactos codificados a documento de texto
+ * Parte 2: Decodificar contactos y mostrarlos en consola
  * Integrantes del equipo:
  * SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
  * CABRERA LÓPEZ OSCAR EMILIO
