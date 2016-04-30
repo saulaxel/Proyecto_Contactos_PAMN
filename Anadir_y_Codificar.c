@@ -137,13 +137,13 @@ int main (int argc, char *argv[]) {
 	Contacto *ap_lista_contactos = arr_lista_contactos; // apuntador a la lista de contactos
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
 	                         // abierto, lo iniciamos en NULL por seguridad
-
-	#ifdef _WIN32
-	validarUsuario();
-	#endif //_WIN32
 	
 	// ### Parte 1: Mensajes iniciales ###
 	presentacion();
+	getchar();
+	#ifdef _WIN32
+	validarUsuario();
+	#endif //_WIN32
 	
 	/* 
 	 * ### Parte 2: Leer los contactos existentes ### 
