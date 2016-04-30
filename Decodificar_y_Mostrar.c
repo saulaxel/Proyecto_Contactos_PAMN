@@ -90,6 +90,7 @@ int main(int argc, char * argv[]){
 	ap_lista_contactos = (Contacto *) calloc( contarFilas(ap_archivo) , sizeof(Contacto) );
 	/* ### Parte 1: Mensajes iniciales ### */
 	presentacion();
+	getchar();
 	#ifdef _WIN32
 	validarUsuario();
 	#endif //_WIN32
@@ -126,7 +127,7 @@ void presentacion () {
 // Codigo de la función contar filas
 int contarFilas( FILE* ap_archivo ){
 	int contador = 0;
-	unsigned char cadena[MAX_NOMBRE+1];
+	unsigned char cadena[MAX_NOMBRE+MAX_CORREO+MAX_NUMERO+MAX_NUMCASA+5];
 	unsigned char *ap_cadena = cadena;
 	
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "r");
