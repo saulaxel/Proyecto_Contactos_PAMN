@@ -422,7 +422,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 			return 0;
 		}else{
 			int i; // Contador para el ciclo
-			for( i = posicion , i < MAX_CONTACTOS - 2 , ++i ){
+			for( i = posicion ; i < MAX_CONTACTOS - 2 ; ++i ){
 				strcpy( (ap_lista_contactos + i)->nombre, (ap_lista_contactos + i + 1)->nombre );
 				strcpy( (ap_lista_contactos + i)->numero, (ap_lista_contactos + i + 1)->numero );
 				strcpy( (ap_lista_contactos + i)->correo, (ap_lista_contactos + i + 1)->correo );
@@ -443,6 +443,8 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 /* Codigo de la función actualzarContacto */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char *ap_cadena;
+	int posicion;
+	
 	printf("Ingrese el nombre del contacto que desea actualizar\n");
 	scanf(" %50[^\n]", ap_cadena);
 	if( (posicion = buscar(ap_lista_contactos, ap_cadena) ) == -1 ){
