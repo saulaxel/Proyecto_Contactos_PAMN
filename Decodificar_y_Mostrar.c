@@ -126,7 +126,8 @@ void presentacion () {
 // Codigo de la función contar filas
 int contarFilas( FILE* ap_archivo ){
 	int contador = 0;
-	unsigned char *ap_cadena;
+	unsigned char cadena[MAX_NOMBRE+1];
+	unsigned char *ap_cadena = cadena;
 	
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "r");
 	
