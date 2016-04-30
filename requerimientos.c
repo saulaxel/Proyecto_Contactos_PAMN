@@ -126,6 +126,9 @@ int main (int argc, char *argv[]) {
 	 escribirArchivo( ap_archivo, ap_lista_contactos, num_contactos );
 
 	/* ### Parte 4: Mensaje de despedida ### */
+	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
+	printf("\tRegresa pronto :)");
+	
 	return 0;
 }
 
