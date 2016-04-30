@@ -421,6 +421,10 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	}else{
 		printf("Ingrese el nombre del contacto que desea borrar\n");
 		scanf(" %50[^\n]",ap_nombre);
+		#ifdef _WIN32
+		reparar(ap_nombre);
+		#endif //_WIN32
+		
 		if( (posicion = buscar(ap_lista_contactos, ap_nombre) ) == -1 ){
 			printf("Contacto no encontrado\n");
 			return 0;
@@ -451,6 +455,10 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	
 	printf("Ingrese el nombre del contacto que desea actualizar\n");
 	scanf(" %50[^\n]", ap_cadena);
+	#ifdef _WIN32
+	reparar(ap_cadena);
+	#endif //_WIN32
+		
 	if( (posicion = buscar(ap_lista_contactos, ap_cadena) ) == -1 ){
 		printf("Contacto no encontrado\n");
 	}else{
@@ -557,7 +565,7 @@ void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_con
 	for( n = 0; n < num_contactos; ++n ){
 		fprintf(ap_archivo ,"%s\t%s\t%s\t%s\n",
 			(ap_lista_contactos + n)->nombre,
-			(ap_lista_contactos + n)->nomero,
+			(ap_lista_contactos + n)->numero,
 			(ap_lista_contactos + n)->correo,
 			(ap_lista_contactos + n)->numcasa
 		);
