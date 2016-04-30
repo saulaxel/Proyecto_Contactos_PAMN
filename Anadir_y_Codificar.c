@@ -79,11 +79,6 @@ int leerArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos);
  */
 void codificar(Contacto *, int );
 
-
- //void escribirArchivo(FILE *, Contacto *); // Prototipo de la función "escribirArchivo"
- //
- 
-
 /*
  * Declaración: decodificar : Contactos, entero -> vacío
  * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
@@ -118,8 +113,16 @@ int borrarContacto(Contacto *,int); // Prototipo de la función "borrarContacto"
  */
 void actualizarContacto(Contacto *, int); // Prototipo de la función "actualizarContacto" */
 
+/*
+ * Declaración: escribirArchivo: Archivo, Contacto , int -> vacio
+ * Proposito: Función que toma por argumentos un apuntador a archivo y 
+ * un arreglo de contactos que usará para abrir un archivo de texto
+ * y guardar en el datos de un número entero de estructuras "Contacto"
+ */
+void escribirArchivo(FILE *, Contacto *, int); // Prototipo de la función "escribirArchivo"
+
 /* 
- * Declaración: buscar : Contactos, cadena -> entero
+ * Declaración: buscar : Contacto, cadena -> entero
  * Propósito: Función que toma por argumentos el arreglo de contactos
  * y una cadena que buscara entre los datos "nombre" del arreglo de 
  * contactos para devolver la posicón de dicho nombre en el arreglo 
@@ -177,11 +180,12 @@ int main (int argc, char *argv[]) {
 			break;
 		case 4:
 			printf ("Seleccionaste salir\n");
+			codificar(ap_lista_contactos, num_contactos);
+			escribirArchivo(ap_archivo, ap_lista_contactos, num_contactos);
 			seleccion = 0;
 			break;
 		default:
 			printf ("Opción incorrecta, selecciona otra opción\n");
-
 			seleccion = -1;
 		}
 		printf ("\nPresiona ENTER para continuar\n");
@@ -543,6 +547,21 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		
 		printf("Contacto sacado correctamente\n");
 	}
+}
+
+//Codigo de la función para guardar todos los datos en un archivo de texto
+void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_contactos){
+	int n;
+	ap_archivo = fopen(NOMBRE_ARCHIVO, "w");
+	
+	for( n = 0; n < num_contactos; ++n ){
+		fprintf(ap_archivo ,"%s\t%s\t%s\t%s\n",
+			(ap_lista_contactos + n)->nombre,
+			(ap_lista_contactos + n)->nomero,
+			(ap_lista_contactos + n)->correo,
+			(ap_lista_contactos + n)->numcasa
+		);
+	}	
 }
 
 // Codigo de la función buscar (contacto)
