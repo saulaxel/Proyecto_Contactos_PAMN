@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#define MAX_CONTACTOS 10 // Solo para pruebas volvi a declarar un arreglo estatico al inicio
+#define MAX_CONTACTOS 100 
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
 #define MAX_NUMERO 10  // del nombre, número de telefono,
 #define MAX_CORREO 30  // correo electronico,
