@@ -37,6 +37,16 @@ struct contacto { // Definición de la estructura "contacto"
 };
 typedef struct contacto Contacto; /* Se define un alias para "struct contacto" que será "Contacto" */
 
+/* Declaración: presentacion : vacío -> vacío
+ * Próposito: Esta función imprime nuestra portada, no toma ni devuelve nada
+ * Ejemplo : presentacion();
+ *	debería imprimir
+ *	##################################
+ *	#          Proyecto 3            #
+ *	##################################
+ */
+void presentacion (void);
+
 /*
  * Declaración: contarFilas: Archivo -> entero
  * Proposito: Función que abre el archivo de los contactos codificados 
@@ -79,10 +89,11 @@ int main(int argc, char * argv[]){
 	
 	ap_lista_contactos = (Contacto *) calloc( contarFilas(ap_archivo) , sizeof(Contacto) );
 	/* ### Parte 1: Mensajes iniciales ### */
+	presentacion();
 	
 	/* ### Parte 2: Leer y decodificar ### */
 	num_contactos = leerArchivo(ap_archivo,ap_lista_contactos);
-	decodificar(ap_lusta_contactos,num_contactos);
+	decodificar(ap_lista_contactos,num_contactos);
 	
 	/* ### Parte 3: Impresión con formato ### */
 	imprimirContactos(ap_lista_contactos,num_contactos);
@@ -91,6 +102,22 @@ int main(int argc, char * argv[]){
 	  /* Aquí va el mismo mensaje de despedida que en el primer programa*/
 	getchar();
 	return 0;
+}
+
+// funcion de presentacion, para más informacion ir a la declaración
+// imprime gatos, almohadillas o numerales, por los problemas con ascii en linux
+// alguien usando windows deberia corregirlo
+void presentacion () {
+	printf ("\n###############################################\n"); //
+	printf ("#   Universidad Nacional Aútonoma de México   #\n");
+	printf ("#            Facultad de Ingeniería           #\n");
+	printf ("#  Programación avanzada y métodos numéricos  #\n");
+	printf ("#                  Proyecto 1                 #\n");
+	printf ("#          Cabrera López Oscar Emilio         #\n");
+	printf ("#             Mendoza García Ulises           #\n");
+	printf ("#       Sierra González Héctor Alejandro      #\n");
+	printf ("#           Martínez Ortiz Saúl Axel          #\n");
+	printf ("###############################################\n\n");
 }
 
 // Codigo de la función contar filas
@@ -110,12 +137,83 @@ int contarFilas( FILE* ap_archivo ){
 	return contador;
 }
 
-/* Codigo de la función leerArchivo */
-int leerArchivo(FILE *archivo, Contacto *listaContactos){
-	
+// función para leer los contactos del archivo
+// para una descripcion detallada, vaya a la definición
+int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
+	int num_contactos = 0, j = 0; // declaramos los contadores que usaremos
+	ap_archivo = fopen (NOMBRE_ARCHIVO, "r+"); // abrimos el archivo en
+     // modo lectura o creación, para asegurarnos que exista
+	if (ap_archivo == NULL) { // manejamos el caso en que no se pueda crear el archivo
+		return 0; // Si el archivo no está trabajaremos en blanco por lo que se 
+			  // devuelve 0 y los contactos se irán creando conforme al usuario
+		//printf ("\nNo se pudo leer, ni crear el archivo D:\n\t");
+		//printf ("Asegurate de tener permisos suficientes para leer o escribir aquí\n");
+		//exit(-1); // salimos indicando un error al sistema operativo
+	}
+	while (!feof(ap_archivo)) { // mientras no acabe el archivo
+		fscanf(ap_archivo," %50[^\t]\t%10[^\t]\t%30[^\t]\t%3[^\n]\n", // este scanset toma
+		 // los valores separados con tabuladores, y solo permite espacios en la
+		 // cadena del nombre, explicado un poco más:
+		 // ' %50[^\t]' lee y guarda hasta 50 caracteres o hasta encontrar
+		 // un tabulador (sin almacenar el tabulador)
+		 // '\t' lee y descarta el tabulador
+		 // '%10[^\t]' lee y guarda hasta 10 caracteres o encontrar un tabulador,
+		 // espacio, o un salto de linea
+		 // '\t' lee y descarta el tabulador
+		 // '%30[^\t]' lee y guarda hasta 30 caracteres o encontrar un tabulador
+		 // '%3[^\n]' lee y guarda hasta 3 caracteres o un salto de linea
+			ap_lista_contactos->nombre,// guarda la primer cadena aqui
+			ap_lista_contactos->numero, // la segunda cadena aqui
+			ap_lista_contactos->correo, // la tercer cadena aqui
+			ap_lista_contactos->numcasa); // y la cuarta aquí
+		num_contactos++; //aumentamos el contador de contactos
+		ap_lista_contactos++; // y pasamos al siguiente elemento
+	}
+	for (j = 0; j < num_contactos; j++) {
+		ap_lista_contactos--; // devolvemos el apuntador apuntando al primer elemento
+	}
+	fclose (ap_archivo); // limpiamos nuestra area de trabajo
+	return num_contactos; // disminuimos y devolvemos el numero de contactos
 }
 
 /* Codigo de la función decodificar */
-void decodificar(Contacto *listaContactos, int numContactos){
+void decodificar(Contacto *ap_lista_contactos, int num_contactos){
+	int i, j;
+	unsigned char *apu;
+	for (i = 0; i < num_contactos; i++) {
+		apu = (ap_lista_contactos+i)->nombre;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->nombre); j++) {
+			*apu -= 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos+i)->numero;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->numero); j++) {
+			*apu -= 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos+i)->correo;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->correo); j++) {
+			*apu -= 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos+i)->numcasa;
+		for (j = 0; j < strlen ((ap_lista_contactos+i)->numcasa); j++) {
+			*apu -= 3;
+			apu++;
+		}
+	}
+}
+
+void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
+	int n;
 	
-} 
+	printf("Los contactos guardados son;");
+	for( n = 0; n < num_contactos; ++n ){
+		printf(ap_archivo ,"%s\t%s\t%s\t%s\n",
+			(ap_lista_contactos + n)->nombre,
+			(ap_lista_contactos + n)->numero,
+			(ap_lista_contactos + n)->correo,
+			(ap_lista_contactos + n)->numcasa
+		);
+	}	
+}
