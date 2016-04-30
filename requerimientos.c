@@ -261,7 +261,6 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 //Codigo de la función para guardar todos los datos en un archivo de texto
 void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_contactos){
 	int n;
-	FILE *ap_archivo;
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "w");
 	
 	for( n = 0; n < num_contactos; ++n ){
