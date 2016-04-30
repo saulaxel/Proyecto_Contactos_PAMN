@@ -87,13 +87,13 @@ int main(int argc, char * argv[]){
 	int num_contactos; // Contador de "Contactos"
 	FILE *ap_archivo = NULL; /* apuntador a file para referenciar un archivo abierto */
 	
-	#ifdef _WIN32
-	validarUsuario();
-	#endif //_WIN32
-	
 	ap_lista_contactos = (Contacto *) calloc( contarFilas(ap_archivo) , sizeof(Contacto) );
 	/* ### Parte 1: Mensajes iniciales ### */
 	presentacion();
+	getchar();
+	#ifdef _WIN32
+	validarUsuario();
+	#endif //_WIN32
 	
 	/* ### Parte 2: Leer y decodificar ### */
 	num_contactos = leerArchivo(ap_archivo,ap_lista_contactos);
@@ -103,7 +103,9 @@ int main(int argc, char * argv[]){
 	imprimirContactos(ap_lista_contactos,num_contactos);
 	
 	/* ### Parte 4: Mensaje de despedida ### */
-	  /* Aquí va el mismo mensaje de despedida que en el primer programa*/
+	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
+	printf("\tRegresa pronto :)");
+	
 	getchar();
 	return 0;
 }
@@ -127,7 +129,8 @@ void presentacion () {
 // Codigo de la función contar filas
 int contarFilas( FILE* ap_archivo ){
 	int contador = 0;
-	unsigned char *ap_cadena;
+	unsigned char cadena[MAX_NOMBRE+MAX_CORREO+MAX_NUMERO+MAX_NUMCASA+5];
+	unsigned char *ap_cadena = cadena;
 	
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "r");
 	
@@ -211,9 +214,9 @@ void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
 	int n;
 	
-	printf("Los contactos guardados son;");
+	printf("Los contactos guardados son:\n");
 	for( n = 0; n < num_contactos; ++n ){
-		printf(ap_archivo ,"%s\t%s\t%s\t%s\n",
+		printf("Nombre: %s\tNumero: %s\nCorreo: %s\t Número de casa: %s\n\n",
 			(ap_lista_contactos + n)->nombre,
 			(ap_lista_contactos + n)->numero,
 			(ap_lista_contactos + n)->correo,

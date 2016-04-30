@@ -137,13 +137,13 @@ int main (int argc, char *argv[]) {
 	Contacto *ap_lista_contactos = arr_lista_contactos; // apuntador a la lista de contactos
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
 	                         // abierto, lo iniciamos en NULL por seguridad
-
-	#ifdef _WIN32
-	validarUsuario();
-	#endif //_WIN32
 	
 	// ### Parte 1: Mensajes iniciales ###
 	presentacion();
+	getchar();
+	#ifdef _WIN32
+	validarUsuario();
+	#endif //_WIN32
 	
 	/* 
 	 * ### Parte 2: Leer los contactos existentes ### 
@@ -198,6 +198,9 @@ int main (int argc, char *argv[]) {
 	} while ( seleccion );
 
 	/* ### Parte 5: Mensaje de despedida ### */
+	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
+	printf("\tRegresa pronto :)");
+	
 	return 0;
 }
 
@@ -416,6 +419,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 /* Codigo de la función borrarContacto */
 int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
+	unsigned char nombre[MAX_NOMBRE+1];
 	unsigned char *ap_nombre;
 	int posicion;
 	
@@ -454,6 +458,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 /* Codigo de la función actualzarContacto */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
+	unsigned char cadena[MAX_NOMBRE+1];
 	unsigned char *ap_cadena;
 	int posicion;
 	
@@ -564,7 +569,6 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 //Codigo de la función para guardar todos los datos en un archivo de texto
 void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_contactos){
 	int n;
-	FILE *ap_archivo;
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "w");
 	
 	for( n = 0; n < num_contactos; ++n ){
