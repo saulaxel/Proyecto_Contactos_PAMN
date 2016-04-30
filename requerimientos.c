@@ -104,6 +104,7 @@ int main (int argc, char *argv[]) {
 	
 	// ### Parte 1: Mensajes iniciales ###
 	presentacion();
+	getchar();
 	#ifdef _WIN32
 	validarUsuario();
 	#endif //_WIN32
