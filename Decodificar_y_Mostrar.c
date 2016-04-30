@@ -103,7 +103,9 @@ int main(int argc, char * argv[]){
 	imprimirContactos(ap_lista_contactos,num_contactos);
 	
 	/* ### Parte 4: Mensaje de despedida ### */
-	  /* Aquí va el mismo mensaje de despedida que en el primer programa*/
+	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
+	printf("\tRegresa pronto :)");
+	
 	getchar();
 	return 0;
 }
