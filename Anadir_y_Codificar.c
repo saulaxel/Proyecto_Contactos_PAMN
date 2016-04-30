@@ -138,6 +138,10 @@ int main (int argc, char *argv[]) {
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
 	                         // abierto, lo iniciamos en NULL por seguridad
 
+	#ifdef _WIN32
+	validarUsuario();
+	#endif //_WIN32
+	
 	// ### Parte 1: Mensajes iniciales ###
 	presentacion();
 	
@@ -405,7 +409,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 		return 1;
 	}else{
-		printf("Número de contactos maximo excedido\n");
+		printf("Número de contactos máximo excedido\n");
 		return 0;	
 	}
 }
@@ -472,7 +476,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		scanf(" %hd",&s);
 		
 		if( s==1 || s==5 ){
-			printf("Ingrese el nuevo nombre");
+			printf("Ingrese el nuevo nombre\n");
 			scanf(" %50[^\n]", ap_cadena);
 			#ifdef _WIN32
 			reparar( ap_cadena );
@@ -481,7 +485,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 		
 		if( s==2 || s==5 ){
-			printf("Ingrese el nuevo número del contacto");
+			printf("Ingrese el nuevo número del contacto\n");
 			scanf(" %10s", ap_cadena);
 			for (i = 0; i < strlen( ap_cadena ); ++i) {
 				if( *( ap_cadena + i ) < 48 || *( ap_cadena + i ) > 57 ){
