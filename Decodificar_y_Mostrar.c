@@ -213,7 +213,7 @@ void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
 	
 	printf("Los contactos guardados son;");
 	for( n = 0; n < num_contactos; ++n ){
-		printf(ap_archivo ,"%s\t%s\t%s\t%s\n",
+		printf("%s\t%s\t%s\t%s\n",
 			(ap_lista_contactos + n)->nombre,
 			(ap_lista_contactos + n)->numero,
 			(ap_lista_contactos + n)->correo,
