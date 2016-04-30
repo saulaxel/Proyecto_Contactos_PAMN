@@ -117,7 +117,7 @@ int borrarContacto(Contacto *,int); // Prototipo de la función "borrarContacto"
  * y modificar sus datos
  */
 void actualizarContacto(Contacto *, int); // Prototipo de la función "actualizarContacto" */
-buscar(ap_lista_contactos, ap_nombre)
+
 /* 
  * Declaración: buscar : Contactos, cadena -> entero
  * Propósito: Función que toma por argumentos el arreglo de contactos
@@ -411,7 +411,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char *ap_nombre;
 	int posicion;
 	
-	if( num_contactos = MAX_CONTACTOS ){
+	if( num_contactos = 0 ){
 		printf("No hay contactos a sacar\n");
 		return 0;
 	}else{
@@ -442,7 +442,123 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 /* Codigo de la función actualzarContacto */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
-
+	unsigned char ap_cadena;
+	printf("Ingrese el nombre del contacto que desea actualizar\n");
+	scanf(" %50[^\n]", ap_cadena);
+	if( (posicion = buscar(ap_lista_contactos, ap_cadena) ) == -1 ){
+		printf("Contacto no encontrado\n");
+	}else{
+		unsigned short s; // Entero que guarda la selección del usuario
+		
+		printf("Indique el dato del contacto que desea actualizar:\n");
+		printf("\t1. %s\n\t2. %s\n\t3. %s\n\t4. %s\n\t5. %s\n\n",
+			"Nombre","Telefono","Correo","Número de casa","Todos"
+		      );
+		scanf(" %hd",&s);
+		
+		if( s==1 || s==5 ){
+			printf("Ingrese el nuevo nombre");
+			scanf(" %50[^\n]", ap_cadena);
+			#ifdef _WIN32
+			reparar( ap_cadena );
+			#endif //_WIN32
+			strcpy( (ap_lista_contactos+posicion)->nombre , ap_cadena );
+		}
+		if( s==2 || s==5 ){
+			printf("Ingrese el nuevo número del contacto");
+			scanf(" %10s", ap_cadena);
+			for (i = 0; i < strlen ->numero); i++) {
+			if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+				no_numero = 1;
+			}
+		}
+		while( no_numero ){
+			no_numero = 0;
+			printf("Caracteres invalidos para un número de telefono. Vuelva a teclear el número\n");
+			scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
+			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
+				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+					no_numero = 1;
+				}
+			}
+		}
+		}
+		
+		printf("Ingrese el número del nuevo contacto\n");
+		scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
+		ap_c = (ap_lista_contactos+num_contactos)->numero;
+		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
+			if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+				no_numero = 1;
+			}
+		}
+		while( no_numero ){
+			no_numero = 0;
+			printf("Caracteres invalidos para un número de telefono. Vuelva a teclear el número\n");
+			scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
+			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
+				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+					no_numero = 1;
+				}
+			}
+		}
+		
+		printf("Ingrese el correo del nuevo contacto\n");
+		scanf(" %30s", (ap_lista_contactos+num_contactos)->correo);
+		ap_c = (ap_lista_contactos+num_contactos)->correo;
+		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->correo); i++) {
+			if( *( ap_c + i ) == 64 ){
+				arroba = 1;
+			}
+			if( *( ap_c + i ) == 46){
+				punto = 1;
+			}
+			if( *( ap_c + i ) > 128 ){
+				ascii_ext = 1;
+			}
+		}
+		while( !(arroba && punto) || ascii_ext ){
+			arroba = 0; punto = 0; ascii_ext = 0;
+			printf("Formato invalido para correo, favor de volver a escribirlo\n");
+			scanf(" %30s", (ap_lista_contactos+num_contactos)->correo);
+			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->correo); i++) {
+				if( *( ap_c + i ) == 64 ){
+					arroba = 1;
+				}
+				if( *( ap_c + i ) == 46){
+					punto = 1;
+				}
+				if( *( ap_c + i ) > 128 ){
+					ascii_ext = 1;
+				}
+			}
+		
+		}
+		
+		printf("Ingrese el número de casa del nuevo contacto\n");
+		scanf(" %3s", (ap_lista_contactos+num_contactos)->numcasa);
+		ap_c = (ap_lista_contactos+num_contactos)->numcasa;
+		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numcasa); i++) {
+			if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+				no_numero = 1;
+			}
+		}
+		while( no_numero ){
+			no_numero = 0;
+			printf("Caracteres invalidos para un número de casa. Vuelva a teclear el número\n");
+			scanf(" %3s", (ap_lista_contactos+num_contactos)->numcasa);
+			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numcasa); i++) {
+				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
+					no_numero = 1;
+				}
+			}
+		}
+		return 1;
+	}else{
+		printf("Número de contactos maximo excedido\n");
+		return 0;	
+	}
+			printf("Contacto borrado exitosamente\n");
 }
 
 // Codigo de la función buscar (contacto)
