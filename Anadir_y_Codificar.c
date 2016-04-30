@@ -416,6 +416,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 /* Codigo de la función borrarContacto */
 int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
+	unsigned char nombre[MAX_NOMBRE+1];
 	unsigned char *ap_nombre;
 	int posicion;
 	
@@ -454,6 +455,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 /* Codigo de la función actualzarContacto */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
+	unsignes char cadena[MAX_NOMBRE+1];
 	unsigned char *ap_cadena;
 	int posicion;
 	
