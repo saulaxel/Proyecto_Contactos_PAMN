@@ -472,7 +472,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 			printf("Ingrese el nuevo número del contacto");
 			scanf(" %10s", ap_cadena);
 			for (i = 0; i < strlen( ap_cadena ); ++i) {
-				if( *( ap_cadena + i ) < 48 || *( ap_c + i ) > 57 ){
+				if( *( ap_cadena + i ) < 48 || *( ap_cadena + i ) > 57 ){
 					no_numero = 1;
 				}
 			}
@@ -553,7 +553,7 @@ int buscar(Contacto *ap_lista_contactos, unsigned char* ap_nombre){
 	while( c < MAX_CONTACTOS && (pos == -1) ){
 		if( strcmp( (ap_lista_contactos+c)->nombre, ap_nombre) == 0 ){
 			pos = c;
-		)
+		}
 		++c;
 	}
 	return pos;
