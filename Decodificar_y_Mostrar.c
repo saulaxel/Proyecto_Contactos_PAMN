@@ -87,6 +87,10 @@ int main(int argc, char * argv[]){
 	int num_contactos; // Contador de "Contactos"
 	FILE *ap_archivo = NULL; /* apuntador a file para referenciar un archivo abierto */
 	
+	#ifdef _WIN32
+	validarUsuario();
+	#endif //_WIN32
+	
 	ap_lista_contactos = (Contacto *) calloc( contarFilas(ap_archivo) , sizeof(Contacto) );
 	/* ### Parte 1: Mensajes iniciales ### */
 	presentacion();
