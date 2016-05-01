@@ -562,7 +562,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 			strcpy( (ap_lista_contactos+posicion)->numcasa , ap_cadena );
 		}
 		
-		printf("Contacto sacado correctamente\n");
+		printf("Contacto actualizado correctamente\n");
 	}
 }
 

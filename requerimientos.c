@@ -118,7 +118,9 @@ int main (int argc, char *argv[]) {
 	 scanf("%d",&num_contactos);
 	 ap_lista_contactos = calloc( num_contactos, sizeof(Contacto) );
 	 for( i = 0; i < num_contactos; ++i ){
-	    agregarContacto( ap_lista_contactos , i );
+	 	printf("Para el contacto %d\n",i+1);
+	    	agregarContacto( ap_lista_contactos , i );
+	    	putchar('\n');
 	 }
 	 
 	 /* ### Parte3: Guardar contactos en archivo ### */
