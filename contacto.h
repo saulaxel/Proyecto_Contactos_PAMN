@@ -1,29 +1,29 @@
 #ifndef CONTACTO_H_INCLUDED
 #define CONTACTO_H_INCLUDED
-/* Biblioteca exclusiva para su uso en el proyecto de ProgramaciÛn
-* avanzada y metodos numÈricos, la cual esta sujeta a las especificaciones
+/* Biblioteca exclusiva para su uso en el proyecto de Programaci√≥n
+* avanzada y metodos num√©ricos, la cual esta sujeta a las especificaciones
 * de este
 */
 
 /*
- * Primer Proyecto ProgramaciÛn Avanzada y metodos numÈricos
+ * Primer Proyecto Programaci√≥n Avanzada y metodos num√©ricos
  * "Sistema de seguridad para contactos"
  * Biblioteca contacto.h que incorpora funciones utilizadas en ambos programas
  * Integrantes del equipo:
- * SIERRA GONZ¡LEZ H…CTOR ALEJANDRO
- * CABRERA L”PEZ OSCAR EMILIO
- * DÕAZ ALF…REZ MELISA
- * MENDOZA GARCÕA ULISES
- * MARTÕNEZ ORTIZ SA⁄L AXEL
+ * SIERRA GONZ√ÅLEZ H√âCTOR ALEJANDRO
+ * CABRERA L√ìPEZ OSCAR EMILIO
+ * D√çAZ ALF√âREZ MELISA
+ * MENDOZA GARC√çA ULISES
+ * MART√çNEZ ORTIZ SA√öL AXEL
  */
 
-#include <stdio.h> // Biblioteca est·ndar para la entrada y salida
+#include <stdio.h> // Biblioteca est√°ndar para la entrada y salida
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
 #define MAX_CONTACTOS 100
-#define MAX_NOMBRE 50  // definimos las longitudes m·ximas
-#define MAX_NUMERO 10  // del nombre, n˙mero de telefono,
+#define MAX_NOMBRE 50  // definimos las longitudes m√°ximas
+#define MAX_NUMERO 10  // del nombre, n√∫mero de telefono,
 #define MAX_CORREO 30  // correo electronico,
 #define MAX_NUMCASA 3  // y numero de casa
 #define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
@@ -37,23 +37,23 @@
 	#define CLEAR "clear"
 #endif
 
-// funcion de presentacion, para m·s informacion ir a la declaraciÛn
+// funcion de presentacion, para m√°s informacion ir a la declaraci√≥n
 // imprime gatos, almohadillas o numerales, por los problemas con ascii en linux
 // alguien usando windows deberia corregirlo
 void presentacion () {
 	printf ("\n###############################################\n"); //
-	printf ("#   Universidad Nacional A˙tonoma de MÈxico   #\n");
-	printf ("#            Facultad de IngenierÌa           #\n");
-	printf ("#  ProgramaciÛn avanzada y mÈtodos numÈricos  #\n");
+	printf ("#   Universidad Nacional A√∫tonoma de M√©xico   #\n");
+	printf ("#            Facultad de Ingenier√≠a           #\n");
+	printf ("#  Programaci√≥n avanzada y m√©todos num√©ricos  #\n");
 	printf ("#                  Proyecto 1                 #\n");
-	printf ("#          Cabrera LÛpez Oscar Emilio         #\n");
-	printf ("#             DÌaz ALfÈrez Melisa             #\n");
-	printf ("#             Mendoza GarcÌa Ulises           #\n");
-	printf ("#       Sierra Gonz·lez HÈctor Alejandro      #\n");
-	printf ("#           MartÌnez Ortiz Sa˙l Axel          #\n");
+	printf ("#          Cabrera L√≥pez Oscar Emilio         #\n");
+	printf ("#             D√≠az ALf√©rez Melisa             #\n");
+	printf ("#             Mendoza Garc√≠a Ulises           #\n");
+	printf ("#       Sierra Gonz√°lez H√©ctor Alejandro      #\n");
+	printf ("#           Mart√≠nez Ortiz Sa√∫l Axel          #\n");
 	printf ("###############################################\n\n");
 }
-// funcion de despedida al tÈrmino de la ejecuciÛn del programa
+// funcion de despedida al t√©rmino de la ejecuci√≥n del programa
 void despedida () {
 	printf ("\n###############################################\n"); //
 	printf ("# Muchas gracias por utilizar nuestro servicio  #\n");
@@ -62,20 +62,20 @@ void despedida () {
 
 }
 
-// funcion de presentacion, para m·s informacion ir a la declaraciÛn
+// funcion de presentacion, para m√°s informacion ir a la declaraci√≥n
 int menu (void) { // damos un valor inicial a seleccion
 	int seleccion;
-	printf ("\n\t\tBienvenido. \n\t Elige una opciÛn:"); // peticion al usuario
-	printf ("\n\t1. AÒadir contacto "); // primer opciÛn
-	printf ("\n\t2. Actualizar contacto"); // segunda opciÛn
-	printf ("\n\t3. Borrar contactos"); // tercer opciÛn
+	printf ("\n\t\tBienvenido. \n\t Elige una opci√≥n:"); // peticion al usuario
+	printf ("\n\t1. A√±adir contacto "); // primer opci√≥n
+	printf ("\n\t2. Actualizar contacto"); // segunda opci√≥n
+	printf ("\n\t3. Borrar contactos"); // tercer opci√≥n
 	printf ("\n\t4. Salir\n"); // salida del programa
-	scanf ("%d", &seleccion); // asignamos una opcion a la secciÛn
+	scanf ("%d", &seleccion); // asignamos una opcion a la secci√≥n
 	return seleccion;
 }
 
 
-/* Codigo de la funciÛn codificar */
+/* Codigo de la funci√≥n codificar */
 void codificar(Contacto *ap_lista_contactos, int num_contactos){
 	int i, j;
 	unsigned char *apu;
@@ -103,7 +103,7 @@ void codificar(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-/* Codigo de la funciÛn decodificar */
+/* Codigo de la funci√≥n decodificar */
 void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 	int i, j;
 	unsigned char *apu;
@@ -131,7 +131,7 @@ void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-/* Codigo de la funciÛn agregarContacto */
+/* Codigo de la funci√≥n agregarContacto */
 int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	int i;
 	unsigned short no_numero = 0, arroba = 0 , punto = 0, ascii_ext = 0;
@@ -143,7 +143,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		reparar((ap_lista_contactos+num_contactos)->nombre);
 		#endif //_WIN32
 
-		printf("Ingrese el n˙mero del nuevo contacto\n");
+		printf("Ingrese el n√∫mero del nuevo contacto\n");
 		scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
 		ap_c = (ap_lista_contactos+num_contactos)->numero;
 		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
@@ -153,7 +153,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 		while( no_numero ){
 			no_numero = 0;
-			printf("Caracteres invalidos para un n˙mero de telefono. Vuelva a teclear el n˙mero\n");
+			printf("Caracteres invalidos para un n√∫mero de telefono. Vuelva a teclear el n√∫mero\n");
 			scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
 			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numero); i++) {
 				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
@@ -194,7 +194,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 
 		}
 
-		printf("Ingrese el n˙mero de casa del nuevo contacto\n");
+		printf("Ingrese el n√∫mero de casa del nuevo contacto\n");
 		scanf(" %3s", (ap_lista_contactos+num_contactos)->numcasa);
 		ap_c = (ap_lista_contactos+num_contactos)->numcasa;
 		for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numcasa); i++) {
@@ -204,7 +204,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 		while( no_numero ){
 			no_numero = 0;
-			printf("Caracteres invalidos para un n˙mero de casa. Vuelva a teclear el n˙mero\n");
+			printf("Caracteres invalidos para un n√∫mero de casa. Vuelva a teclear el n√∫mero\n");
 			scanf(" %3s", (ap_lista_contactos+num_contactos)->numcasa);
 			for (i = 0; i < strlen ((ap_lista_contactos+num_contactos)->numcasa); i++) {
 				if( *( ap_c + i ) < 48 || *( ap_c + i ) > 57 ){
@@ -214,12 +214,12 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 		return 1;
 	}else{
-		printf("N˙mero de contactos m·ximo excedido\n");
+		printf("N√∫mero de contactos m√°ximo excedido\n");
 		return 0;
 	}
 }
 
-/* Codigo de la funciÛn borrarContacto */
+/* Codigo de la funci√≥n borrarContacto */
 int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char nombre[MAX_NOMBRE+1];
 	unsigned char *ap_nombre;
@@ -258,7 +258,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-/* Codigo de la funciÛn actualzarContacto */
+/* Codigo de la funci√≥n actualzarContacto */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char cadena[MAX_NOMBRE+1];
 	unsigned char *ap_cadena;
@@ -273,12 +273,12 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	if( (posicion = buscar(ap_lista_contactos, ap_cadena) ) == -1 ){
 		printf("Contacto no encontrado\n");
 	}else{
-		unsigned short s; // Entero que guarda la selecciÛn del usuario
+		unsigned short s; // Entero que guarda la selecci√≥n del usuario
 		unsigned short i; // Entero contador
 		unsigned short no_numero = 0, arroba = 0, punto = 0, ascii_ext = 0; // Enteros usados como banderas booleana
 		printf("Indique el dato del contacto que desea actualizar:\n");
 		printf("\t1. %s\n\t2. %s\n\t3. %s\n\t4. %s\n\t5. %s\n\n",
-			"Nombre","Telefono","Correo","N˙mero de casa","Todos"
+			"Nombre","Telefono","Correo","N√∫mero de casa","Todos"
 		      );
 		scanf(" %hd",&s);
 
@@ -292,7 +292,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 
 		if( s==2 || s==5 ){
-			printf("Ingrese el nuevo n˙mero del contacto\n");
+			printf("Ingrese el nuevo n√∫mero del contacto\n");
 			scanf(" %10s", ap_cadena);
 			for (i = 0; i < strlen( ap_cadena ); ++i) {
 				if( *( ap_cadena + i ) < 48 || *( ap_cadena + i ) > 57 ){
@@ -301,7 +301,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 			}
 			while( no_numero ){
 				no_numero = 0;
-				printf("Caracteres invalidos para un n˙mero de telefono. Vuelva a teclear el n˙mero\n");
+				printf("Caracteres invalidos para un n√∫mero de telefono. Vuelva a teclear el n√∫mero\n");
 				scanf(" %10s", ap_cadena);
 				for (i = 0; i < strlen( ap_cadena ); ++i) {
 					if( *( ap_cadena + i ) < 48 || *( ap_cadena + i ) > 57 ){
@@ -344,7 +344,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		}
 
 		if( s==4 || s==5 ){
-			printf("Ingrese el nuevo n˙mero de casa del contacto\n");
+			printf("Ingrese el nuevo n√∫mero de casa del contacto\n");
 			scanf(" %3s", ap_cadena);
 			for( i = 0; i < strlen( ap_cadena ); ++i ){
 				if( *(ap_cadena + i) < 48 || *(ap_cadena + i) > 57 ){
@@ -352,7 +352,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 				}
 			}
 			while( no_numero ){
-				printf("Caracteres invalidos para un n˙mero de casa. Vuelva a teclear el n˙mero\n");
+				printf("Caracteres invalidos para un n√∫mero de casa. Vuelva a teclear el n√∫mero\n");
 				scanf(" %3s", ap_cadena);
 				for( i = 0; i < strlen( ap_cadena ); ++i ){
 					if( *(ap_cadena + i) < 48 || *(ap_cadena + i) > 57 ){
@@ -368,7 +368,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-//Codigo de la funciÛn para guardar todos los datos en un archivo de texto
+//Codigo de la funci√≥n para guardar todos los datos en un archivo de texto
 void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_contactos){
 	int n;
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "w");
@@ -383,10 +383,10 @@ void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_con
 	}
 }
 
-// Codigo de la funciÛn buscar (contacto)
+// Codigo de la funci√≥n buscar (contacto)
 int buscar(Contacto *ap_lista_contactos, unsigned char* ap_nombre){
 	int c = 0; // contador para el ciclo
-	int pos = -1; // Variable para guardar la posiciÛn del contacto
+	int pos = -1; // Variable para guardar la posici√≥n del contacto
 
 	while( c < MAX_CONTACTOS && (pos == -1) ){
 		if( strcmp( (ap_lista_contactos+c)->nombre, ap_nombre) == 0 ){
@@ -399,7 +399,7 @@ int buscar(Contacto *ap_lista_contactos, unsigned char* ap_nombre){
 
 
 
-// Codigo de la funciÛn contar filas
+// Codigo de la funci√≥n contar filas
 int contarFilas( FILE* ap_archivo ){
 	int contador = 0;
 	unsigned char cadena[MAX_NOMBRE+MAX_CORREO+MAX_NUMERO+MAX_NUMCASA+5];
@@ -417,23 +417,23 @@ int contarFilas( FILE* ap_archivo ){
 	return contador;
 }
 
-// funciÛn para leer los contactos del archivo
-// para una descripcion detallada, vaya a la definiciÛn
+// funci√≥n para leer los contactos del archivo
+// para una descripcion detallada, vaya a la definici√≥n
 int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	int num_contactos = 0, j = 0; // declaramos los contadores que usaremos
 	ap_archivo = fopen (NOMBRE_ARCHIVO, "r+"); // abrimos el archivo en
-     // modo lectura o creaciÛn, para asegurarnos que exista
+     // modo lectura o creaci√≥n, para asegurarnos que exista
 	if (ap_archivo == NULL) { // manejamos el caso en que no se pueda crear el archivo
-		return 0; // Si el archivo no est· trabajaremos en blanco por lo que se
-			  // devuelve 0 y los contactos se ir·n creando conforme al usuario
+		return 0; // Si el archivo no est√° trabajaremos en blanco por lo que se
+			  // devuelve 0 y los contactos se ir√°n creando conforme al usuario
 		//printf ("\nNo se pudo leer, ni crear el archivo D:\n\t");
-		//printf ("Asegurate de tener permisos suficientes para leer o escribir aquÌ\n");
+		//printf ("Asegurate de tener permisos suficientes para leer o escribir aqu√≠\n");
 		//exit(-1); // salimos indicando un error al sistema operativo
 	}
 	while (!feof(ap_archivo)) { // mientras no acabe el archivo
 		fscanf(ap_archivo," %50[^\t]\t%10[^\t]\t%30[^\t]\t%3[^\n]\n", // este scanset toma
 		 // los valores separados con tabuladores, y solo permite espacios en la
-		 // cadena del nombre, explicado un poco m·s:
+		 // cadena del nombre, explicado un poco m√°s:
 		 // ' %50[^\t]' lee y guarda hasta 50 caracteres o hasta encontrar
 		 // un tabulador (sin almacenar el tabulador)
 		 // '\t' lee y descarta el tabulador
@@ -445,7 +445,7 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 			ap_lista_contactos->nombre,// guarda la primer cadena aqui
 			ap_lista_contactos->numero, // la segunda cadena aqui
 			ap_lista_contactos->correo, // la tercer cadena aqui
-			ap_lista_contactos->numcasa); // y la cuarta aquÌ
+			ap_lista_contactos->numcasa); // y la cuarta aqu√≠
 		num_contactos++; //aumentamos el contador de contactos
 		ap_lista_contactos++; // y pasamos al siguiente elemento
 	}
@@ -462,7 +462,7 @@ void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
 
 	printf("Los contactos guardados son:\n");
 	for( n = 0; n < num_contactos; ++n ){
-		printf("Nombre: %s\tNumero: %s\nCorreo: %s\t N˙mero de casa: %s\n\n",
+		printf("Nombre: %s\tNumero: %s\nCorreo: %s\t N√∫mero de casa: %s\n\n",
 			(ap_lista_contactos + n)->nombre,
 			(ap_lista_contactos + n)->numero,
 			(ap_lista_contactos + n)->correo,
@@ -470,5 +470,5 @@ void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
 		);
 	}
 }
-
+//123
 
