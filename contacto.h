@@ -34,9 +34,16 @@
 	#define CLEAR "clear"
 #endif // Fin del #if _WIN32
 
-// funcion de presentación, para más informacion ir a la declaración
+// funcion de presentación
 // imprime gatos, almohadillas o numerales, por los problemas con ascii en linux
-// alguien usando windows deberia corregirlo
+/* Declaración: presentacion : vacío -> vacío
+ * Próposito: Esta función imprime nuestra portada, no toma ni devuelve nada
+ * Ejemplo : presentacion();
+ *	debería imprimir
+ *	##################################
+ *	#          Proyecto 3            #
+ *	##################################
+ */
 void presentacion () {
 	printf ("\n###############################################\n"); //
 	printf ("#   Universidad Nacional Aútonoma de México   #\n");
@@ -60,6 +67,17 @@ void despedida () {
 }
 
 // funcion de presentacion, para más informacion ir a la declaración
+/*
+ * Declaración: menu : vacío -> entero
+ * Próposito: Esta funcion despliega el menú y devuelve la opción seleccionada
+ * por el usuario como un entero.
+ * Ejemplo: Seleccione una opción:
+ *	1. Primer opción
+ *	2. Segunda opción
+ *	3. Tercer opción
+ *	Elige una: 2
+ *  Debería devolver 2
+ */
 int menu (void) { // damos un valor inicial a seleccion
 	int seleccion;
 	printf ("\n\t\tBienvenido. \n\t Elige una opción:"); // peticion al usuario
@@ -72,7 +90,14 @@ int menu (void) { // damos un valor inicial a seleccion
 }
 
 
-/* Codigo de la función codificar */
+// Codigo de la función codificar 
+
+/*
+ * Declaración: codificar : Contactos, entero -> vacío
+ * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
+ * Contactos y un entero que indica el número de los mismos, para despues recorrer
+ * cada uno de los datos de los mismos sumandole 3 al codigo de sus caracteres
+ */
 void codificar(Contacto *ap_lista_contactos, int num_contactos){
 	int i, j;
 	unsigned char *apu;
@@ -100,7 +125,13 @@ void codificar(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-/* Codigo de la función decodificar */
+// Codigo de la función decodificar 
+/*
+ * Declaración: decodificar : Contactos, entero -> vacío
+ * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
+ * Contactos, y para cada uno de los datos que contiene esta estructura, resta 3
+ * al cada caracter
+ */
 void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 	int i, j;
 	unsigned char *apu;
@@ -128,7 +159,14 @@ void decodificar(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-/* Codigo de la función agregarContacto */
+// Codigo de la función agregarContacto 
+/*
+ * Declaración: agregarContacto : Contactos, entero -> int
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y el número de contactos para añadir datos de un nuevo contacto al 
+ * final del arreglo y devuelve 1 en caso de realizar la tarea con éxito
+ * o 0 en caso contrario
+ */
 int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	int i;
 	unsigned short no_numero = 0, arroba = 0 , punto = 0, ascii_ext = 0;
@@ -216,7 +254,14 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-/* Codigo de la función borrarContacto */
+// Codigo de la función borrarContacto 
+/*
+ * Declaración: borrarContacto : Contactos, entero -> int
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y el número de contactos para borrar los datos de un contacto 
+ * del arreglo y devuelve 1 en caso de realizar la tarea con éxito
+ * o 0 en caso contrario
+ */
 int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char nombre[MAX_NOMBRE+1];
 	unsigned char *ap_nombre;
@@ -255,7 +300,13 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
-/* Codigo de la función actualzarContacto */
+// Codigo de la función actualizarContacto 
+/*
+ * Declaración: actualizarContacto : Contactos, entero -> vacio
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y el número de contactos para buscar un contacto elegido por el usuario 
+ * y modificar sus datos
+ */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char cadena[MAX_NOMBRE+1];
 	unsigned char *ap_cadena;
@@ -366,6 +417,12 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 }
 
 //Codigo de la función para guardar todos los datos en un archivo de texto
+/*
+ * Declaración: escribirArchivo: Archivo, Contacto , int -> vacio
+ * Proposito: Función que toma por argumentos un apuntador a archivo y 
+ * un arreglo de contactos que usará para abrir un archivo de texto
+ * y guardar en el datos de un número entero de estructuras "Contacto"
+ */
 void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_contactos){
 	int n;
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "w");
@@ -381,6 +438,13 @@ void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_con
 }
 
 // Codigo de la función buscar (contacto)
+/* 
+ * Declaración: buscar : Contacto, cadena -> entero
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y una cadena que buscara entre los datos "nombre" del arreglo de 
+ * contactos para devolver la posicón de dicho nombre en el arreglo 
+ * (en caso de encontrarlo) o devolver -1 si no se encuentra.
+ */
 int buscar(Contacto *ap_lista_contactos, unsigned char* ap_nombre){
 	int c = 0; // contador para el ciclo
 	int pos = -1; // Variable para guardar la posición del contacto
@@ -397,6 +461,12 @@ int buscar(Contacto *ap_lista_contactos, unsigned char* ap_nombre){
 
 
 // Codigo de la función contar filas
+/*
+ * Declaración: contarFilas: Archivo -> entero
+ * Proposito: Función que abre el archivo de los contactos codificados 
+ * y lo recorre completamente contando el número de filas que este 
+ * contiene
+ */
 int contarFilas( FILE* ap_archivo ){
 	int contador = 0;
 	unsigned char cadena[MAX_NOMBRE+MAX_CORREO+MAX_NUMERO+MAX_NUMCASA+5];
@@ -415,7 +485,15 @@ int contarFilas( FILE* ap_archivo ){
 }
 
 // función para leer los contactos del archivo
-// para una descripcion detallada, vaya a la definición
+/* Declaración: leerArchivo : Archivo, Contactos -> numero
+ * Próposito: Esta función toma como parámetros un apuntador a un archivo y un
+ * apuntador a un arreglo estructuras de contacto, lee los contactos almacenados
+ * en el archivo y almacena cada uno en una estructura Contacto, al terminar
+ * devuelve el número de contactosque leyo exitosamente-
+ * Ejemplo: Con un archivo almacenando 10 contactos
+ *	leerArchivo(ap_archivo, Contactos)
+ * deberia devolver 10 y rellenar 10 elementos del arreglo
+ */
 int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	int num_contactos = 0, j = 0; // declaramos los contadores que usaremos
 	ap_archivo = fopen (NOMBRE_ARCHIVO, "r+"); // abrimos el archivo en
@@ -453,7 +531,12 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	return num_contactos; // disminuimos y devolvemos el numero de contactos
 }
 
-
+// función para imprimir los contactos 
+/*
+ * Declaración: imprimirContactos: Contacto , int -> vacio
+ * Proposito: Función que toma por argumentos un arreglo de contactos 
+ * y el tamaño del mismo para imprimir a pantalla todos los "contactos"
+ */
 void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
 	int n;
 
