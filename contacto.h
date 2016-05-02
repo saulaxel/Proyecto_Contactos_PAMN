@@ -470,5 +470,4 @@ void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
 		);
 	}
 }
-//123
 
