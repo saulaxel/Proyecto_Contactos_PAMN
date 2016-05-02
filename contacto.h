@@ -27,17 +27,14 @@
 #define MAX_CORREO 30  // correo electronico,
 #define MAX_NUMCASA 3  // y numero de casa
 #define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
-#ifdef _WIN32
+#ifdef _WIN32 // Si se trabaja en windows
 	#define CLEAR "cls"
 	#include "contrasena.h"
-	#ifdef _WIN64
-		#define CLEAR "cls"
-	#endif
-#else
+#else // En caso contrario ( provablemente unix/linux )
 	#define CLEAR "clear"
-#endif
+#endif // Fin del #if _WIN32
 
-// funcion de presentacion, para más informacion ir a la declaración
+// funcion de presentación, para más informacion ir a la declaración
 // imprime gatos, almohadillas o numerales, por los problemas con ascii en linux
 // alguien usando windows deberia corregirlo
 void presentacion () {
@@ -471,3 +468,4 @@ void imprimirContactos(Contacto *ap_lista_contactos, int num_contactos){
 	}
 }
 
+#endif // Termina el #if CONTACTO_H_INCLUDED y con el la declaración de la biblioteca
