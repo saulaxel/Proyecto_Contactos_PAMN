@@ -5,6 +5,9 @@
 * de este
 */
 
+#include <stdlib.h>
+#include <locale.h>
+
 #ifdef _WIN32
 
 #include <conio.h>
@@ -181,12 +184,12 @@ void pedirContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) 
 		if ( c > 127 ){
 			do{
 				printf("\nCaracter invalido, remplacelo por otro:\n");
-	#if WINDOWS
+#if WINDOWS
 				c = getch();
-	#else
+#else
 				c = getchar();
 				getchar();
-	#endif
+#endif
 			}while ( c > 127 );
 		}
 #endif /* Fin ESTANDAR */

@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "contacto.h"
+
 #define MAX_CONTACTOS 100
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
 #define MAX_NUMERO 10  // del nombre, número de telefono,
@@ -40,9 +41,9 @@
 #define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
 
 #ifdef _WIN32
-	#define CLEAR "cls"
+#define CLEAR "cls"
 #else
-	#define CLEAR "clear"
+#define CLEAR "clear"
 #endif
 
 int main (int argc, char *argv[]) {
@@ -50,13 +51,13 @@ int main (int argc, char *argv[]) {
 	int num_contactos = 0; // Se crea un contador de "Contactos"
 	Contacto *ap_lista_contactos; // apuntador a la lista de contactos
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
-	                         // abierto, lo iniciamos en NULL por seguridad
+	// abierto, lo iniciamos en NULL por seguridad
 	int i;
 	// ### Parte 1: Mensajes iniciales ###
-	presentacion();
-	getchar();
+	presentacion ();
+	getchar ();
 #ifdef _WIN32
-	validarUsuario();
+	validarUsuario ();
 #endif //_WIN32
 
 	/*
@@ -64,22 +65,22 @@ int main (int argc, char *argv[]) {
 	 * Se pregunta al usuario cuantos contactos desea guardar y se le pide dicha
 	 * cantidad de veces datos para los contactos
 	 */
-	 printf("¿Cuántos contactos desea guardar?\n");
-	 scanf("%d",&num_contactos);
-	 ap_lista_contactos = calloc( num_contactos, sizeof(Contacto) );
-	 for( i = 0; i < num_contactos; ++i ){
-	 	printf("Para el contacto %d\n",i+1);
-	    	agregarContacto( ap_lista_contactos , i );
-	    	putchar('\n');
-	 }
+	printf ("¿Cuántos contactos desea guardar?\n");
+	scanf ("%d", &num_contactos);
+	ap_lista_contactos = crearArreglo(num_contactos);
+	for (i = 0; i < num_contactos; ++i) {
+		printf ("Para el contacto %d\n", i + 1);
+		agregarContacto (ap_lista_contactos, i);
+		putchar ('\n');
+	}
 
-	 /* ### Parte3: Guardar contactos en archivo ### */
-	 codificar(ap_lista_contactos, num_contactos);
-	 escribirArchivo( ap_archivo, ap_lista_contactos, num_contactos );
+	/* ### Parte3: Guardar contactos en archivo ### */
+	codificar (ap_lista_contactos, num_contactos);
+	escribirArchivo (ap_archivo, ap_lista_contactos, num_contactos);
 
 	/* ### Parte 4: Mensaje de despedida ### */
-	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
-	printf("\tRegresa pronto :)");
+	printf ("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
+	printf ("\tRegresa pronto :)");
 
 	return 0;
 }
