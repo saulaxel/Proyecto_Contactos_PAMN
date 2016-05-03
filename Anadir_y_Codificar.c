@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#define MAX_CONTACTOS 100 
+#define MAX_CONTACTOS 100
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
 #define MAX_NUMERO 10  // del nombre, número de telefono,
 #define MAX_CORREO 30  // correo electronico,
@@ -22,9 +22,6 @@
 #ifdef _WIN32
 	#define CLEAR "cls"
 	#include "contrasena.h"
-	#ifdef _WIN64
-		#define CLEAR "cls"
-	#endif
 #else
 	#define CLEAR "clear"
 #endif
@@ -85,12 +82,12 @@ void codificar(Contacto *, int );
  * Contactos, y para cada uno de los datos que contiene esta estructura, resta 3
  * al cada caracter
  */
-void decodificar(Contacto *ap_lista_contactos, int num_contactos); 
+void decodificar(Contacto *ap_lista_contactos, int num_contactos);
 
 /*
  * Declaración: agregarContacto : Contactos, entero -> int
  * Propósito: Función que toma por argumentos el arreglo de contactos
- * y el número de contactos para añadir datos de un nuevo contacto al 
+ * y el número de contactos para añadir datos de un nuevo contacto al
  * final del arreglo y devuelve 1 en caso de realizar la tarea con éxito
  * o 0 en caso contrario
  */
@@ -99,7 +96,7 @@ int agregarContacto(Contacto *,int);
 /*
  * Declaración: borrarContacto : Contactos, entero -> int
  * Propósito: Función que toma por argumentos el arreglo de contactos
- * y el número de contactos para borrar los datos de un contacto 
+ * y el número de contactos para borrar los datos de un contacto
  * del arreglo y devuelve 1 en caso de realizar la tarea con éxito
  * o 0 en caso contrario
  */
@@ -108,24 +105,24 @@ int borrarContacto(Contacto *,int); // Prototipo de la función "borrarContacto"
 /*
  * Declaración: actualizarContacto : Contactos, entero -> vacio
  * Propósito: Función que toma por argumentos el arreglo de contactos
- * y el número de contactos para buscar un contacto elegido por el usuario 
+ * y el número de contactos para buscar un contacto elegido por el usuario
  * y modificar sus datos
  */
 void actualizarContacto(Contacto *, int); // Prototipo de la función "actualizarContacto" */
 
 /*
  * Declaración: escribirArchivo: Archivo, Contacto , int -> vacio
- * Proposito: Función que toma por argumentos un apuntador a archivo y 
+ * Proposito: Función que toma por argumentos un apuntador a archivo y
  * un arreglo de contactos que usará para abrir un archivo de texto
  * y guardar en el datos de un número entero de estructuras "Contacto"
  */
 void escribirArchivo(FILE *, Contacto *, int); // Prototipo de la función "escribirArchivo"
 
-/* 
+/*
  * Declaración: buscar : Contacto, cadena -> entero
  * Propósito: Función que toma por argumentos el arreglo de contactos
- * y una cadena que buscara entre los datos "nombre" del arreglo de 
- * contactos para devolver la posicón de dicho nombre en el arreglo 
+ * y una cadena que buscara entre los datos "nombre" del arreglo de
+ * contactos para devolver la posicón de dicho nombre en el arreglo
  * (en caso de encontrarlo) o devolver -1 si no se encuentra.
  */
 int buscar(Contacto * ,unsigned char *);
@@ -137,31 +134,31 @@ int main (int argc, char *argv[]) {
 	Contacto *ap_lista_contactos = arr_lista_contactos; // apuntador a la lista de contactos
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
 	                         // abierto, lo iniciamos en NULL por seguridad
-	
+
 	// ### Parte 1: Mensajes iniciales ###
 	presentacion();
 	getchar();
 	#ifdef _WIN32
 	validarUsuario();
 	#endif //_WIN32
-	
-	/* 
-	 * ### Parte 2: Leer los contactos existentes ### 
+
+	/*
+	 * ### Parte 2: Leer los contactos existentes ###
 	 * Como en esta sección solo se llama a la función, la persona a la que
 	 * le toque esta parte solo tiene que construir el metodo de dicha función
 	 * el cual se encuentra vacio actualmente
 	 */
 	num_contactos = leerArchivo(ap_archivo,ap_lista_contactos);
-	
-	/* 
-	* ### Parte 3: Decodificar los contactos ### 
+
+	/*
+	* ### Parte 3: Decodificar los contactos ###
 	* Como en esta sección solo se llama a la función, la persona a la que
 	* le toque esta parte solo tiene que construir el metodo de dicha función
 	* el cual se encuentra vacio actualmente
 	*/
 	decodificar (ap_lista_contactos, num_contactos);
 
-	/* 
+	/*
 	 * ### Parte 4: Menú ###
 	 * Hay varias funciones que son llamadas en esta sección pero
 	 * hacerlas no necesariamente es responsabilidad de la persona que crea
@@ -200,7 +197,7 @@ int main (int argc, char *argv[]) {
 	/* ### Parte 5: Mensaje de despedida ### */
 	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
 	printf("\tRegresa pronto :)");
-	
+
 	return 0;
 }
 
@@ -241,7 +238,7 @@ int leerArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	ap_archivo = fopen (NOMBRE_ARCHIVO, "r+"); // abrimos el archivo en
      // modo lectura o creación, para asegurarnos que exista
 	if (ap_archivo == NULL) { // manejamos el caso en que no se pueda crear el archivo
-		return 0; // Si el archivo no está trabajaremos en blanco por lo que se 
+		return 0; // Si el archivo no está trabajaremos en blanco por lo que se
 			  // devuelve 0 y los contactos se irán creando conforme al usuario
 		//printf ("\nNo se pudo leer, ni crear el archivo D:\n\t");
 		//printf ("Asegurate de tener permisos suficientes para leer o escribir aquí\n");
@@ -340,7 +337,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		#ifdef _WIN32
 		reparar((ap_lista_contactos+num_contactos)->nombre);
 		#endif //_WIN32
-		
+
 		printf("Ingrese el número del nuevo contacto\n");
 		scanf(" %10s", (ap_lista_contactos+num_contactos)->numero);
 		ap_c = (ap_lista_contactos+num_contactos)->numero;
@@ -359,7 +356,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 				}
 			}
 		}
-		
+
 		printf("Ingrese el correo del nuevo contacto\n");
 		scanf(" %30s", (ap_lista_contactos+num_contactos)->correo);
 		ap_c = (ap_lista_contactos+num_contactos)->correo;
@@ -389,9 +386,9 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 					ascii_ext = 1;
 				}
 			}
-		
+
 		}
-		
+
 		printf("Ingrese el número de casa del nuevo contacto\n");
 		scanf(" %3s", (ap_lista_contactos+num_contactos)->numcasa);
 		ap_c = (ap_lista_contactos+num_contactos)->numcasa;
@@ -413,7 +410,7 @@ int agregarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		return 1;
 	}else{
 		printf("Número de contactos máximo excedido\n");
-		return 0;	
+		return 0;
 	}
 }
 
@@ -422,7 +419,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char nombre[MAX_NOMBRE+1];
 	unsigned char *ap_nombre;
 	int posicion;
-	
+
 	if( num_contactos = 0 ){
 		printf("No hay contactos a sacar\n");
 		return 0;
@@ -432,7 +429,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 		#ifdef _WIN32
 		reparar(ap_nombre);
 		#endif //_WIN32
-		
+
 		if( (posicion = buscar(ap_lista_contactos, ap_nombre) ) == -1 ){
 			printf("Contacto no encontrado\n");
 			return 0;
@@ -444,12 +441,12 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 				strcpy( (ap_lista_contactos + i)->correo, (ap_lista_contactos + i + 1)->correo );
 				strcpy( (ap_lista_contactos + i)->numcasa, (ap_lista_contactos + i + 1)->numcasa );
 			}
-			
+
 			memset( (ap_lista_contactos + i)->nombre, '\0', 50 );
 			memset( (ap_lista_contactos + i)->numero, '\0', 10 );
 			memset( (ap_lista_contactos + i)->correo, '\0', 30 );
 			memset( (ap_lista_contactos + i)->numcasa, '\0', 3 );
-			
+
 			printf("Contacto borrado exitosamente\n");
 			return 1;
 		}
@@ -461,13 +458,13 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char cadena[MAX_NOMBRE+1];
 	unsigned char *ap_cadena;
 	int posicion;
-	
+
 	printf("Ingrese el nombre del contacto que desea actualizar\n");
 	scanf(" %50[^\n]", ap_cadena);
 	#ifdef _WIN32
 	reparar(ap_cadena);
 	#endif //_WIN32
-		
+
 	if( (posicion = buscar(ap_lista_contactos, ap_cadena) ) == -1 ){
 		printf("Contacto no encontrado\n");
 	}else{
@@ -479,7 +476,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 			"Nombre","Telefono","Correo","Número de casa","Todos"
 		      );
 		scanf(" %hd",&s);
-		
+
 		if( s==1 || s==5 ){
 			printf("Ingrese el nuevo nombre\n");
 			scanf(" %50[^\n]", ap_cadena);
@@ -488,7 +485,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 			#endif //_WIN32
 			strcpy( (ap_lista_contactos+posicion)->nombre , ap_cadena );
 		}
-		
+
 		if( s==2 || s==5 ){
 			printf("Ingrese el nuevo número del contacto\n");
 			scanf(" %10s", ap_cadena);
@@ -507,10 +504,10 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 					}
 				}
 			}
-			
+
 			strcpy( (ap_lista_contactos+posicion)->numero , ap_cadena );
 		}
-		
+
 		if( s==3 || s== 5 ){
 			printf("Ingrese el nuevo correo del contacto\n");
 			scanf(" %30s", ap_cadena);
@@ -537,10 +534,10 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 					}
 				}
 			}
-			
+
 			strcpy( (ap_lista_contactos+posicion)->correo , ap_cadena );
 		}
-		
+
 		if( s==4 || s==5 ){
 			printf("Ingrese el nuevo número de casa del contacto\n");
 			scanf(" %3s", ap_cadena);
@@ -558,10 +555,10 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 					}
 				}
 			}
-			
+
 			strcpy( (ap_lista_contactos+posicion)->numcasa , ap_cadena );
 		}
-		
+
 		printf("Contacto actualizado correctamente\n");
 	}
 }
@@ -570,7 +567,7 @@ void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_contactos){
 	int n;
 	ap_archivo = fopen(NOMBRE_ARCHIVO, "w");
-	
+
 	for( n = 0; n < num_contactos; ++n ){
 		fprintf(ap_archivo ,"%s\t%s\t%s\t%s\n",
 			(ap_lista_contactos + n)->nombre,
@@ -578,14 +575,14 @@ void escribirArchivo(FILE *ap_archivo, Contacto *ap_lista_contactos, int num_con
 			(ap_lista_contactos + n)->correo,
 			(ap_lista_contactos + n)->numcasa
 		);
-	}	
+	}
 }
 
 // Codigo de la función buscar (contacto)
 int buscar(Contacto *ap_lista_contactos, unsigned char* ap_nombre){
 	int c = 0; // contador para el ciclo
 	int pos = -1; // Variable para guardar la posición del contacto
-	
+
 	while( c < MAX_CONTACTOS && (pos == -1) ){
 		if( strcmp( (ap_lista_contactos+c)->nombre, ap_nombre) == 0 ){
 			pos = c;

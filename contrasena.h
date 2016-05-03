@@ -5,30 +5,41 @@
 * de este
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-#define WINDOWS 1
+#ifdef _WIN32
 
-#if WINDOWS
 #include <conio.h>
-#endif /* WINDOWS */
+
+#define CLEAR "cls"
+#else
+#define CLEAR "clear"
+#endif
 
 #define DEBUG 0
 #define ESTANDAR 0
 #define tamDatos 17
-#define archivo_CuentaUsuario "superSecreto.secret"
+#define archivo_CuentaUsuario ".superSecreto.secret"
 #define limpiar(x) for(i=0;i<tamDatos;++i) { x[i]=0; }
 
-enum booleano{falso,verdadero};
+enum booleano {
+	falso, verdadero
+};
 typedef enum booleano Booleano;
 
-void validarUsuario(void);
-void establecerLocale(void); /* Prototipo de la función establecerIdioma */
-void contrasenaDeSeguridad( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la función contrasenaDeSeguridad */
-Booleano comprobarContrasena( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la función comprobarContrasena */
-void pedirContrasena( FILE* , unsigned char* , unsigned char* ); /* Prototipo de la función pedirContrasena */
-void reparar( unsigned char *cadena );
+void validarUsuario (void);
+
+void establecerLocale (void);
+
+/* Prototipo de la función establecerIdioma */
+void contrasenaDeSeguridad (FILE *, unsigned char *, unsigned char *);
+
+/* Prototipo de la función contrasenaDeSeguridad */
+Booleano comprobarContrasena (FILE *, unsigned char *, unsigned char *);
+
+/* Prototipo de la función comprobarContrasena */
+void pedirContrasena (FILE *, unsigned char *, unsigned char *);
+
+/* Prototipo de la función pedirContrasena */
+void reparar (unsigned char *cadena);
 
 unsigned char usuario[tamDatos], contrasena[tamDatos];
 FILE *datosUsuario;
@@ -44,80 +55,75 @@ int main(int argc, char *argv[]) {
 }
 #endif /* fin DEBUG 1*/
 
-void validarUsuario(){
-    contrasenaDeSeguridad( datosUsuario, usuario, contrasena );
+void validarUsuario () {
+	contrasenaDeSeguridad (datosUsuario, usuario, contrasena);
 }
 
-void establecerLocale(){
-    #if ESTANDAR
+void establecerLocale () {
+#if ESTANDAR
 	setlocale(LC_ALL,"");
-    #else
-	setlocale(LC_ALL,"Spanish_Mexico");
-    #endif
+#else
+	setlocale (LC_ALL, "Spanish_Mexico");
+#endif
 }
 
-void contrasenaDeSeguridad(FILE *archivo, unsigned char *user, unsigned char *pswrd ){
-	archivo = fopen(archivo_CuentaUsuario,"r");
+void contrasenaDeSeguridad (FILE *archivo, unsigned char *user, unsigned char *pswrd) {
+	archivo = fopen (archivo_CuentaUsuario, "r");
 
-	if (archivo == NULL){
-		printf("%s%s%s%s%s%s",
-			   "Parace que usted es un nuevo usuario \n",
-			   "Este sistema de seguridad para contactos \n",
-			   "lo identificará a usted con una cuenta y una \n",
-			   "contraseña estandares\n",
-               "(16 caracteres cada una)\n\n\n",
-			   "A continuación deberá ingresar una cuenta y contraseña nuevas"
-			   );
-		getchar();
+	if (archivo == NULL) {
+		printf ("%s%s%s%s%s%s",
+		        "Parace que usted es un nuevo usuario \n",
+		        "Este sistema de seguridad para contactos \n",
+		        "lo identificará a usted con una cuenta y una \n",
+		        "contraseña estandares\n",
+		        "(hasta 16 caracteres cada una)\n\n",
+		        "A continuación deberá ingresar una cuenta y contraseña nuevas\n"
+		);
+		getchar ();
 
-		pedirContrasena(archivo,user, pswrd);
+		pedirContrasena (archivo, user, pswrd);
 
-		archivo = fopen(archivo_CuentaUsuario,"w");
-		fprintf(archivo,"%s\t%s",user,pswrd);
-		fclose(archivo);
+		archivo = fopen (archivo_CuentaUsuario, "w");
+		fprintf (archivo, "%s\t%s", user, pswrd);
+		fclose (archivo);
 
-		printf("\n%s%s\n",
-			   "¡¡¡Felicidades!!!",
-			   "tus contactos estarán seguros a partir de ahora"
-			   );
-		printf("Esperamos que tu experiencia con la aplicación sea grata\n\n");
-		getchar();
-	}else{
-
-		if( comprobarContrasena( archivo, user, pswrd ) == verdadero ){
-			fclose(archivo);
-			printf("\nBienvenido de vuelta %s\n\n",user);
-			getchar();
-		}else{
-            #if WINDOWS
-			system("cls");
-            #else
-			system("clear");
-            #endif
-			printf("\n%s\n\n\n",
-				   "¡¡¡Cuenta de usuario o contraseña incorrecta!!!");
-			printf("\t\tEl programa se cerrará\n");
-			getchar();
-			exit(0);
+		printf ("\n%s%s\n",
+		        "¡¡¡Felicidades!!!",
+		        "tus contactos estarán seguros a partir de ahora"
+		);
+		printf ("Esperamos que tu experiencia con la aplicación sea grata\n\n");
+		getchar ();
+	} else {
+		if (comprobarContrasena (archivo, user, pswrd) == verdadero) {
+			fclose (archivo);
+			printf ("\nBienvenido de vuelta %s\n\n", user);
+			getchar ();
+		} else {
+			system (CLEAR);
+			printf ("\n%s\n\n\n",
+			        "¡¡¡Cuenta de usuario o contraseña incorrecta!!!");
+			printf ("\t\tEl programa se cerrará\n");
+			getchar ();
+			exit (0);
 		}
 	}
 }
 
-Booleano comprobarContrasena( FILE *archivo , unsigned char *user, unsigned char *pswrd ){
+Booleano comprobarContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) {
 	unsigned char usuarioReal[tamDatos], contrasenaReal[tamDatos];
 	int i; /* Variable contadora */
 	limpiar(usuarioReal)
-    limpiar(contrasenaReal)
+	limpiar(contrasenaReal)
 
-    fscanf(archivo," %s",usuarioReal);
-	fscanf(archivo," %s",contrasenaReal);
-    #if DEBUG /* DEBUG 2*/
+	fscanf (archivo, " %s", usuarioReal);
+	fscanf (archivo, " %s", contrasenaReal);
+#if DEBUG /* DEBUG 2*/
 	printf("\nLos datos de usuario son: %s %s\n",usuarioReal,contrasenaReal);
 	getchar();
-    #endif /* Fin DEBUG 2*/
-	pedirContrasena( archivo , user, pswrd );
+#endif /* Fin DEBUG 2*/
+	pedirContrasena (archivo, user, pswrd);
 
-    #if DEBUG /* DEBUG 3*/
+#if DEBUG /* DEBUG 3*/
 	printf("%s=%s\n",user,usuarioReal);
 	for(i=0;i<tamDatos;++i){
 		printf("%d ",user[i]-usuarioReal[i]);
@@ -129,10 +135,10 @@ Booleano comprobarContrasena( FILE *archivo , unsigned char *user, unsigned char
 	}
 	putchar('\n');
 	getchar();
-    #endif /* Fin del DEBUG 3*/
+#endif /* Fin del DEBUG 3*/
 
-	for( i = 0 ; i < tamDatos-1 ; ++i){
-		if ( (usuarioReal[i]!=user[i]) || (contrasenaReal[i]!=pswrd[i]) ){
+	for (i = 0; i < tamDatos - 1; ++i) {
+		if ((usuarioReal[i] != user[i]) || (contrasenaReal[i] != pswrd[i])) {
 			return falso;
 		}
 	}
@@ -140,104 +146,92 @@ Booleano comprobarContrasena( FILE *archivo , unsigned char *user, unsigned char
 	return verdadero;
 }
 
-void pedirContrasena( FILE *archivo , unsigned char *user , unsigned char *pswrd ){
+void pedirContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) {
 	unsigned char c = 100;
 	short m = 0, n; /* Dos variables contadoras que se usan para pedir datos */
 
 	limpiar(usuario)
 	limpiar(contrasena)
 
-    #if WINDOWS
-	system("cls");
-    #else
-	system("clear");
-    #endif
+	system (CLEAR);
 
-	printf("Por favor ingrese su cuenta de usuario:\n");
-	scanf(" %s",usuario);
+	printf ("Por favor ingrese su cuenta de usuario:\n");
+	scanf (" %s", usuario);
 
-    #if WINDOWS
-	system("cls");
-    #else
-	system("clear");
-    #endif
+	system (CLEAR);
 
-	printf("Por favor ingrese su contraseña");
-    #if  WINDOWS
-    printf(":\n");
-    #else
-    printf(" letra por letra:\n");
-    #endif
+	printf ("Por favor ingrese su contraseña");
+#if  WINDOWS
+	printf(":\n");
+#else
+	printf (" letra por letra:\n");
+#endif
 
-	getchar();
+	getchar ();
 
-    #if  WINDOWS
+#if  WINDOWS
 	c = getch();
-    #else
-	c = getchar();
-	getchar();
-    #endif
+#else
+	c = getchar ();
+	getchar ();
+#endif
 
-	while( c != '\n' && c != '\t' && c != ' ' && c != '\r' && m < tamDatos-1 ){
-    #if ESTANDAR
-    if ( c > 127 ){
-        do{
-            printf("\nCaracter invalido, remplacelo por otro:\n");
-            #if WINDOWS
-            c = getch();
-            #else
-            c = getchar();
-            getchar();
-            #endif
-        }while ( c > 127 );
-    }
-    #endif /* Fin ESTANDAR */
+	while (c != '\n' && c != '\t' && c != ' ' && c != '\r' && m < tamDatos - 1) {
+#if ESTANDAR
+		if ( c > 127 ){
+			do{
+				printf("\nCaracter invalido, remplacelo por otro:\n");
+	#if WINDOWS
+				c = getch();
+	#else
+				c = getchar();
+				getchar();
+	#endif
+			}while ( c > 127 );
+		}
+#endif /* Fin ESTANDAR */
 
-    #if  WINDOWS
-	system("cls");
-    #else
-	system("clear");
-    #endif
+		system (CLEAR);
 
-    if( c != 127 && c != 8 ){
-        contrasena[m] = c;
-		++m;
-    }else{
-		--m;
-    }
+		if (c != 127 && c != 8) {
+			contrasena[m] = c;
+			++m;
+		} else {
+			--m;
+		}
 
-    printf("Por favor ingrese su contraseña");
-    #if  WINDOWS
-    printf(":\n");
-    #else
-    printf(" letra por letra:\n");
-    #endif
-    for( n = 1 ; n <= m ; ++n ){
-        putchar('*');
-    }
+		printf ("Por favor ingrese su contraseña");
+#if  WINDOWS
+		printf(":\n");
+#else
+		printf (" letra por letra:\n");
+#endif
+		for (n = 1; n <= m; ++n) {
+			putchar ('*');
+		}
 
-    #if WINDOWS
-    c = getch();
-    #else
-    c = getchar();
-    getchar();
-    #endif
+#if WINDOWS
+		c = getch();
+#else
+		c = getchar ();
+
+#endif
 
 	}
 	contrasena[m] = '\0';
 
-    reparar( usuario );
-    reparar( contrasena );
+	reparar (usuario);
+	reparar (contrasena);
 
-    #if DEBUG
+#if DEBUG
 	printf("\n%s %s\n",usuario,contrasena);
 	getchar();
-    #endif /* DEBUG */
+#endif /* DEBUG */
 }
 
 
-void reparar( unsigned char *cadena ){
-    short n;
+void reparar (unsigned char *cadena) {
+	short n;
 	unsigned char a[128];
 	a[0] = 'Ç';
 	a[1] = 'ü';
@@ -368,13 +362,12 @@ void reparar( unsigned char *cadena ){
 	a[126] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
 	a[127] = 'a'; /* Caracter no valido para contraseñas en este proyecto, se remplaza por a */
 
-	for( n=0 ; (cadena[n] || n < tamDatos -1) ; ++n ){
-		if (cadena[n]>=128){
-			cadena[n] = a[cadena[n]-128];
+	for (n = 0; (cadena[n] || n < tamDatos - 1); ++n) {
+		if (cadena[n] >= 128) {
+			cadena[n] = a[cadena[n] - 128];
 		}
 	}
 }
-
 
 
 #endif // CONTRASENA_H_INCLUDED
