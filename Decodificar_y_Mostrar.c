@@ -13,7 +13,7 @@
 
 #include "contacto.h"
 
-#define MAX_CONTACTOS 10000 // El profe se va a aburrir antes de ingresar el maximo de contactos
+#define MAX_CONTACTOS 100 // El profe se va a aburrir antes de ingresar el maximo de contactos
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
 #define MAX_NUMERO 10  // del nombre, número de telefono,
 #define MAX_CORREO 30  // correo electronico,
