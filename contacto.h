@@ -16,6 +16,7 @@
  * DÍAZ ALFÉREZ MELISA
  * MENDOZA GARCÍA ULISES
  * MARTÍNEZ ORTIZ SAÚL AXEL
+ * SÁNCHEZ DÍAZ OMAR DIEGO
  */
 
 #include <stdlib.h>
