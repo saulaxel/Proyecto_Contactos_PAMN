@@ -12,6 +12,7 @@
  */
 
 #include "contacto.h"
+#include <locale.h>
 
 /*
  * Declaración: contarFilas: Archivo -> entero
