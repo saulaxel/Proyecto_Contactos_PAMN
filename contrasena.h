@@ -23,25 +23,23 @@
 #define archivo_CuentaUsuario ".superSecreto.secret"
 #define limpiar(x) for(i=0;i<tamDatos;++i) { x[i]=0; }
 
-enum booleano {
-	falso, verdadero
-};
+enum booleano {falso, verdadero};
 typedef enum booleano Booleano;
 
 void validarUsuario (void);
 
 void establecerLocale (void);
 
-/* Prototipo de la función establecerIdioma */
+/* Prototipo de la función contrasenaDeSeguridad */
 void contrasenaDeSeguridad (FILE *, unsigned char *, unsigned char *);
 
-/* Prototipo de la función contrasenaDeSeguridad */
+/* Prototipo de la función comprobarContrasena */
 Booleano comprobarContrasena (FILE *, unsigned char *, unsigned char *);
 
-/* Prototipo de la función comprobarContrasena */
+/* Prototipo de la función pedirContrasena */
 void pedirContrasena (FILE *, unsigned char *, unsigned char *);
 
-/* Prototipo de la función pedirContrasena */
+/* Prototipo de la función reparar */
 void reparar (unsigned char *cadena);
 
 unsigned char usuario[tamDatos], contrasena[tamDatos];
@@ -63,11 +61,11 @@ void validarUsuario () {
 }
 
 void establecerLocale () {
-#if ESTANDAR
+	#if ESTANDAR
 	setlocale(LC_ALL,"");
-#else
+	#else
 	setlocale (LC_ALL, "Spanish_Mexico");
-#endif
+	#endif
 }
 
 void contrasenaDeSeguridad (FILE *archivo, unsigned char *user, unsigned char *pswrd) {
@@ -120,13 +118,13 @@ Booleano comprobarContrasena (FILE *archivo, unsigned char *user, unsigned char 
 
 	fscanf (archivo, " %s", usuarioReal);
 	fscanf (archivo, " %s", contrasenaReal);
-#if DEBUG /* DEBUG 2*/
+	#if DEBUG /* DEBUG 2*/
 	printf("\nLos datos de usuario son: %s %s\n",usuarioReal,contrasenaReal);
 	getchar();
-#endif /* Fin DEBUG 2*/
+	#endif /* Fin DEBUG 2*/
 	pedirContrasena (archivo, user, pswrd);
 
-#if DEBUG /* DEBUG 3*/
+	#if DEBUG /* DEBUG 3*/
 	printf("%s=%s\n",user,usuarioReal);
 	for(i=0;i<tamDatos;++i){
 		printf("%d ",user[i]-usuarioReal[i]);
@@ -138,7 +136,7 @@ Booleano comprobarContrasena (FILE *archivo, unsigned char *user, unsigned char 
 	}
 	putchar('\n');
 	getchar();
-#endif /* Fin del DEBUG 3*/
+	#endif /* Fin del DEBUG 3*/
 
 	for (i = 0; i < tamDatos - 1; ++i) {
 		if ((usuarioReal[i] != user[i]) || (contrasenaReal[i] != pswrd[i])) {
@@ -164,35 +162,35 @@ void pedirContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) 
 	system (CLEAR);
 
 	printf ("Por favor ingrese su contraseña");
-#if  WINDOWS
+	#ifdef _WIN32
 	printf(":\n");
-#else
+	#else
 	printf (" letra por letra:\n");
-#endif
+	#endif
 
 	getchar ();
 
-#if  WINDOWS
+	#ifdef  _WIN32
 	c = getch();
-#else
+	#else
 	c = getchar ();
 	getchar ();
-#endif
+	#endif
 
 	while (c != '\n' && c != '\t' && c != ' ' && c != '\r' && m < tamDatos - 1) {
-#if ESTANDAR
+		#if ESTANDAR
 		if ( c > 127 ){
 			do{
 				printf("\nCaracter invalido, remplacelo por otro:\n");
-#if WINDOWS
+				#ifdef _WIN32
 				c = getch();
-#else
+				#else
 				c = getchar();
 				getchar();
-#endif
+				#endif
 			}while ( c > 127 );
 		}
-#endif /* Fin ESTANDAR */
+		#endif /* Fin ESTANDAR */
 
 		system (CLEAR);
 
@@ -204,21 +202,21 @@ void pedirContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) 
 		}
 
 		printf ("Por favor ingrese su contraseña");
-#if  WINDOWS
+		#ifdef  _WIN32
 		printf(":\n");
-#else
+		#else
 		printf (" letra por letra:\n");
-#endif
+		#endif
 		for (n = 1; n <= m; ++n) {
 			putchar ('*');
 		}
 
-#if WINDOWS
+		#if _WIN32
 		c = getch();
-#else
+		#else
 		c = getchar ();
 
-#endif
+		#endif // _WIN32
 
 	}
 	contrasena[m] = '\0';
@@ -226,10 +224,10 @@ void pedirContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) 
 	reparar (usuario);
 	reparar (contrasena);
 
-#if DEBUG
+	#if DEBUG
 	printf("\n%s %s\n",usuario,contrasena);
 	getchar();
-#endif /* DEBUG */
+	#endif /* DEBUG */
 }
 
 
