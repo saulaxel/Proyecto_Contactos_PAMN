@@ -180,7 +180,7 @@ int borrarContacto(Contacto *ap_lista_contactos, int num_contactos){
 /* Codigo de la función actualzarContacto */
 void actualizarContacto(Contacto *ap_lista_contactos, int num_contactos){
 	unsigned char cadena[MAX_NOMBRE+1];
-	unsigned char *ap_cadena;
+	unsigned char *ap_cadena = cadena;
 	int posicion;
 
 	printf("Ingrese el nombre del contacto que desea actualizar\n");
