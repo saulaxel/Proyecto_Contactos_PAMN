@@ -30,37 +30,22 @@
  * SÁNCHEZ DÍAZ OMAR DIEGO
  */
 
-#include <stdio.h> // Biblioteca estándar para la entrada y salida
-#include <stdlib.h>
-#include <locale.h>
 #include "contacto.h"
-
-#define MAX_CONTACTOS 100
-#define MAX_NOMBRE 50  // definimos las longitudes máximas
-#define MAX_NUMERO 10  // del nombre, número de telefono,
-#define MAX_CORREO 30  // correo electronico,
-#define MAX_NUMCASA 8  // y numero de casa
-#define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
-
-#ifdef _WIN32
-#define CLEAR "cls"
-#else
-#define CLEAR "clear"
-#endif
 
 int main (int argc, char *argv[]) {
 	setlocale (LC_ALL, "");
 	int num_contactos = 0; // Se crea un contador de "Contactos"
 	Contacto *ap_lista_contactos; // apuntador a la lista de contactos
 	FILE *ap_archivo = NULL; // apuntador a file para referenciar un archivo
-	// abierto, lo iniciamos en NULL por seguridad
-	int i;
+				 // abierto, lo iniciamos en NULL por seguridad
+	int i; // contador
+	
 	// ### Parte 1: Mensajes iniciales ###
 	presentacion ();
 	getchar ();
-#ifdef _WIN32
+	#ifdef _WIN32
 	validarUsuario ();
-#endif //_WIN32
+	#endif //_WIN32
 
 	/*
 	 * ### Parte 2: Pedir contactos al usuario ###
@@ -81,8 +66,7 @@ int main (int argc, char *argv[]) {
 	escribirArchivo (ap_archivo, ap_lista_contactos, num_contactos);
 
 	/* ### Parte 4: Mensaje de despedida ### */
-	printf ("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
-	printf ("\tRegresa pronto :)");
+	despedida();
 
 	return 0;
 }
