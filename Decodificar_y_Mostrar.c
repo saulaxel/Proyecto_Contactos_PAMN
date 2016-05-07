@@ -25,6 +25,14 @@
 #define CLEAR "clear"
 #endif
 
+/*
+ * Declaración: contarFilas: Archivo -> entero
+ * Proposito: Función que abre el archivo de los contactos codificados
+ * y lo recorre completamente contando el número de filas que este
+ * contiene
+ */
+int contarFilas(FILE*);
+
 int main (int argc, char *argv[]) {
 	setlocale (LC_ALL, "");
 	Contacto *ap_lista_contactos;
@@ -52,4 +60,22 @@ int main (int argc, char *argv[]) {
 
 	getchar ();
 	return 0;
+}
+
+// Codigo de la función contar filas
+int contarFilas (FILE *ap_archivo) {
+	int contador = 0;
+	unsigned char cadena[MAX_NOMBRE + MAX_CORREO + MAX_NUMERO + MAX_NUMCASA + 5];
+	unsigned char *ap_cadena = cadena;
+
+	ap_archivo = fopen (NOMBRE_ARCHIVO, "r");
+
+	if (ap_archivo != NULL) {
+		while (!feof (ap_archivo)) {
+			fscanf (ap_archivo, "%[^\n]\n", ap_cadena);
+			++contador;
+		}
+	}
+	fclose (ap_archivo);
+	return contador;
 }
