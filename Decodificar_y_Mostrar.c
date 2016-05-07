@@ -13,18 +13,6 @@
 
 #include "contacto.h"
 
-#define MAX_CONTACTOS 100 // El profe se va a aburrir antes de ingresar el maximo de contactos
-#define MAX_NOMBRE 50  // definimos las longitudes máximas
-#define MAX_NUMERO 10  // del nombre, número de telefono,
-#define MAX_CORREO 30  // correo electronico,
-#define MAX_NUMCASA 8  // y numero de casa
-#define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
-#ifdef _WIN32
-#define CLEAR "cls"
-#else
-#define CLEAR "clear"
-#endif
-
 /*
  * Declaración: contarFilas: Archivo -> entero
  * Proposito: Función que abre el archivo de los contactos codificados
