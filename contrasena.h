@@ -157,7 +157,7 @@ void pedirContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) 
 	system (CLEAR);
 
 	printf ("Por favor ingrese su cuenta de usuario:\n");
-	scanf (" %s", usuario);
+	scanf ("%s", usuario);
 
 	system (CLEAR);
 
