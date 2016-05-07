@@ -231,6 +231,7 @@ void pedirContrasena (FILE *archivo, unsigned char *user, unsigned char *pswrd) 
 }
 
 
+#ifdef _WIN32
 void reparar (unsigned char *cadena) {
 	short n;
 	unsigned char a[128];
@@ -369,6 +370,6 @@ void reparar (unsigned char *cadena) {
 		}
 	}
 }
-
+#endif // _WIN32
 
 #endif // CONTRASENA_H_INCLUDED
