@@ -26,14 +26,16 @@ int main (int argc, char *argv[]) {
 	Contacto *ap_lista_contactos;
 	int num_contactos; // Contador de "Contactos"
 	FILE *ap_archivo = NULL; /* apuntador a file para referenciar un archivo abierto */
-
+	
+	/* ### Parte 0: Se crea el arreglo dinámico para su uso posterior ###*/
 	ap_lista_contactos = crearArreglo (contarFilas (ap_archivo));
+	
 	/* ### Parte 1: Mensajes iniciales ### */
 	presentacion ();
 	getchar ();
-#ifdef _WIN32
+	#ifdef _WIN32
 	validarUsuario ();
-#endif //_WIN32
+	#endif //_WIN32
 
 	/* ### Parte 2: Leer y decodificar ### */
 	num_contactos = leerArchivo (ap_archivo, ap_lista_contactos);
@@ -43,8 +45,7 @@ int main (int argc, char *argv[]) {
 	imprimirContactos (ap_lista_contactos, num_contactos);
 
 	/* ### Parte 4: Mensaje de despedida ### */
-	printf ("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
-	printf ("\tRegresa pronto :)");
+	despedida();
 
 	getchar ();
 	return 0;
