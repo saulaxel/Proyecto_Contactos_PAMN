@@ -64,6 +64,17 @@ typedef struct contacto Contacto; // Se define un alias para
  */
 void presentacion (void);
 
+/* Declaración: despedida : vacío -> vacío
+ * Próposito: Esta función imprime el mensaje de espedida por lo que
+ * no toma ni devuelve nada
+ * Ejemplo : despedida();
+ *	debería imprimir
+ *	##################################
+ *	#             Adios              #
+ *	##################################
+ */
+void despedida (void);
+
 /* Declaración: crearArreglo : entero -> Contactos
  * Proposito: La tarea de esta función es alojar suficiente memoria para que se guarde
  * un arreglo de contactos sobre el que se realizarán distintas operaciones
@@ -143,6 +154,12 @@ void presentacion () {
 	printf ("#       Sierra González Héctor Alejandro      #\n");
 	printf ("#           Martínez Ortiz Saúl Axel          #\n");
 	printf ("###############################################\n\n");
+}
+
+// Codigo de la función despedida
+void despedida(){
+	printf("\n\t¡¡Muchas gracias por usar nuestro servicio!!\n");
+	printf("\tRegresa pronto :)");
 }
 
 //Codigo de la función crearArreglo
