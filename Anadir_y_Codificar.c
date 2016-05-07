@@ -11,7 +11,8 @@
  * SÁNCHEZ DÍAZ OMAR DIEGO
  */
 
-#include "contacto.h" // Biblioteca con todas las declaraciones necesarias para que funcione el proyecto 
+#include "contacto.h" // Biblioteca con todas las declaraciones necesarias para que funcione el proyecto
+#include <locale.h>
 
 /*
  * Declaración: menu : vacío -> entero
