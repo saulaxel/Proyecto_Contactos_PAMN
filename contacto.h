@@ -90,6 +90,14 @@ Contacto* crearArreglo(int);
 void codificar(Contacto *, int );
 
 /*
+ * Declaración: decodificar : Contactos, entero -> vacío
+ * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
+ * Contactos, y para cada uno de los datos que contiene esta estructura, resta 3
+ * al cada caracter
+ */
+void decodificar(Contacto*, int);
+
+/*
  * Declaración: agregarContacto : Contactos, entero -> int
  * Propósito: Función que toma por argumentos el arreglo de contactos
  * y el número de contactos para añadir datos de un nuevo contacto al
@@ -116,14 +124,6 @@ void escribirArchivo(FILE *, Contacto *, int);
  * deberia devolver 10 y rellenar 10 elementos del arreglo
  */
 int leerArchivo(FILE*,Contacto*);
-
-/*
- * Declaración: decodificar : Contactos, entero -> vacío
- * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
- * Contactos, y para cada uno de los datos que contiene esta estructura, resta 3
- * al cada caracter
- */
-void decodificar(Contacto*, int);
 
 /*
  * Declaración: imprimirContactos: Contacto , int -> vacio
@@ -192,6 +192,34 @@ void codificar (Contacto *ap_lista_contactos, int num_contactos) {
 		apu = (ap_lista_contactos + i)->numcasa;
 		for (j = 0; j < strlen ((ap_lista_contactos + i)->numcasa); j++) {
 			*apu += 3;
+			apu++;
+		}
+	}
+}
+
+// Codigo de la función decodificar
+void decodificar (Contacto *ap_lista_contactos, int num_contactos) {
+	int i, j;
+	unsigned char *apu;
+	for (i = 0; i < num_contactos; i++) {
+		apu = (ap_lista_contactos + i)->nombre;
+		for (j = 0; j < strlen ((ap_lista_contactos + i)->nombre); j++) {
+			*apu -= 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos + i)->numero;
+		for (j = 0; j < strlen ((ap_lista_contactos + i)->numero); j++) {
+			*apu -= 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos + i)->correo;
+		for (j = 0; j < strlen ((ap_lista_contactos + i)->correo); j++) {
+			*apu -= 3;
+			apu++;
+		}
+		apu = (ap_lista_contactos + i)->numcasa;
+		for (j = 0; j < strlen ((ap_lista_contactos + i)->numcasa); j++) {
+			*apu -= 3;
 			apu++;
 		}
 	}
@@ -338,34 +366,6 @@ int leerArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	}
 	fclose (ap_archivo); // limpiamos nuestra area de trabajo
 	return num_contactos; // disminuimos y devolvemos el numero de contactos
-}
-
-// Codigo de la función decodificar
-void decodificar (Contacto *ap_lista_contactos, int num_contactos) {
-	int i, j;
-	unsigned char *apu;
-	for (i = 0; i < num_contactos; i++) {
-		apu = (ap_lista_contactos + i)->nombre;
-		for (j = 0; j < strlen ((ap_lista_contactos + i)->nombre); j++) {
-			*apu -= 3;
-			apu++;
-		}
-		apu = (ap_lista_contactos + i)->numero;
-		for (j = 0; j < strlen ((ap_lista_contactos + i)->numero); j++) {
-			*apu -= 3;
-			apu++;
-		}
-		apu = (ap_lista_contactos + i)->correo;
-		for (j = 0; j < strlen ((ap_lista_contactos + i)->correo); j++) {
-			*apu -= 3;
-			apu++;
-		}
-		apu = (ap_lista_contactos + i)->numcasa;
-		for (j = 0; j < strlen ((ap_lista_contactos + i)->numcasa); j++) {
-			*apu -= 3;
-			apu++;
-		}
-	}
 }
  
 // Codigo de la función imprimirContactos
