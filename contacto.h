@@ -18,6 +18,14 @@
  * MARTÍNEZ ORTIZ SAÚL AXEL
  * SÁNCHEZ DÍAZ OMAR DIEGO
  */
+ 
+// ##################################################################################################################################
+// ##################################################################################################################################
+// ##################################################################################################################################
+// #################################################### Sección de declaraciones ####################################################
+// ##################################################################################################################################
+// ##################################################################################################################################
+// ##################################################################################################################################
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -27,19 +35,14 @@
 #define MAX_NOMBRE 50  // definimos las longitudes máximas
 #define MAX_NUMERO 10  // del nombre, número de telefono,
 #define MAX_CORREO 30  // correo electronico,
-#define MAX_NUMCASA 8  // y numero de casa
+#define MAX_NUMCASA 3  // y numero de casa
 #define NOMBRE_ARCHIVO "misContactos.txt" // Se define el nombre del archivo como una cadena constante
 #ifdef _WIN32 // Si se trabaja en windows
-#define CLEAR "cls"
-
-#include "contrasena.h"
-
+	#define CLEAR "cls"
+	#include "contrasena.h"
 #else // En caso contrario ( provablemente unix/linux )
-#define CLEAR "clear"
+	#define CLEAR "clear"
 #endif // Fin del #if _WIN32
-
-// funcion de presentación
-// imprime gatos, almohadillas o numerales, por los problemas con ascii en linux
 
 struct contacto { // Definición de la estructura "contacto"
 	unsigned char nombre[MAX_NOMBRE + 1]; //Declaramos nombre como cadena ascii
@@ -59,6 +62,76 @@ typedef struct contacto Contacto; // Se define un alias para
  *	#          Proyecto 3            #
  *	##################################
  */
+void presentacion (void);
+
+/* Declaración: crearArreglo : entero -> Contactos
+ * Proposito: La tarea de esta función es alojar suficiente memoria para que se guarde
+ * un arreglo de contactos sobre el que se realizarán distintas operaciones
+ */
+Contacto* crearArreglo(int);
+
+/*
+ * Declaración: codificar : Contactos, entero -> vacío
+ * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
+ * Contactos y un entero que indica el número de los mismos, para despues recorrer
+ * cada uno de los datos de los mismos sumandole 3 al codigo de sus caracteres
+ */
+void codificar(Contacto *, int );
+
+/*
+ * Declaración: agregarContacto : Contactos, entero -> int
+ * Propósito: Función que toma por argumentos el arreglo de contactos
+ * y el número de contactos para añadir datos de un nuevo contacto al
+ * final del arreglo y devuelve 1 en caso de realizar la tarea con éxito
+ * o 0 en caso contrario
+ */
+int agregarContacto(Contacto *,int);
+
+/*
+ * Declaración: escribirArchivo: Archivo, Contacto , int -> vacio
+ * Proposito: Función que toma por argumentos un apuntador a archivo y
+ * un arreglo de contactos que usará para abrir un archivo de texto
+ * y guardar en el datos de un número entero de estructuras "Contacto"
+ */
+void escribirArchivo(FILE *, Contacto *, int);
+
+/* Declaración: leerArchivo : Archivo, Contactos -> numero
+ * Próposito: Esta función toma como parámetros un apuntador a un archivo y un
+ * apuntador a un arreglo estructuras de contacto, lee los contactos almacenados
+ * en el archivo y almacena cada uno en una estructura Contacto, al terminar
+ * devuelve el número de contactosque leyo exitosamente-
+ * Ejemplo: Con un archivo almacenando 10 contactos
+ *	leerArchivo(ap_archivo, Contactos)
+ * deberia devolver 10 y rellenar 10 elementos del arreglo
+ */
+int leerArchivo(FILE*,Contacto*);
+
+/*
+ * Declaración: decodificar : Contactos, entero -> vacío
+ * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
+ * Contactos, y para cada uno de los datos que contiene esta estructura, resta 3
+ * al cada caracter
+ */
+void decodificar(Contacto*, int);
+
+/*
+ * Declaración: imprimirContactos: Contacto , int -> vacio
+ * Proposito: Función que toma por argumentos un arreglo de contactos
+ * y el tamaño del mismo para imprimir a pantalla todos los "contactos"
+ */
+ void imprimirContactos(Contacto*,int);
+
+// ##################################################################################################################################
+// ##################################################################################################################################
+// ##################################################################################################################################
+// ######################################################## Sección de codigo #######################################################
+// ##################################################################################################################################
+// ##################################################################################################################################
+// ##################################################################################################################################
+
+
+// funcion de presentación
+// imprime gatos, almohadillas o numerales, por los problemas con ascii en linux
 void presentacion () {
 	printf ("\n###############################################\n"); //
 	printf ("#   Universidad Nacional Aútonoma de México   #\n");
@@ -72,24 +145,14 @@ void presentacion () {
 	printf ("###############################################\n\n");
 }
 
-/* Declaración: crearArreglo : entero -> Contactos
- * Proposito: La tarea de esta función es alojar suficiente memoria para que se guarde
- * un arreglo de contactos sobre el que se realizarán distintas operaciones
- */
-
+//Codigo de la función crearArreglo
 Contacto *crearArreglo(int num_contactos) {
 	Contacto *arreglo;
 	arreglo = (Contacto *) calloc (num_contactos, sizeof (Contacto));
 	return arreglo;
 }
 
-
-/*
- * Declaración: codificar : Contactos, entero -> vacío
- * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
- * Contactos y un entero que indica el número de los mismos, para despues recorrer
- * cada uno de los datos de los mismos sumandole 3 al codigo de sus caracteres
- */
+// Codigo de la función codificar 
 void codificar (Contacto *ap_lista_contactos, int num_contactos) {
 	int i, j;
 	unsigned char *apu;
@@ -117,13 +180,7 @@ void codificar (Contacto *ap_lista_contactos, int num_contactos) {
 	}
 }
 
-/*
- * Declaración: agregarContacto : Contactos, entero -> int
- * Propósito: Función que toma por argumentos el arreglo de contactos
- * y el número de contactos para añadir datos de un nuevo contacto al
- * final del arreglo y devuelve 1 en caso de realizar la tarea con éxito
- * o 0 en caso contrario
- */
+//Codigo de la función agregarContacto
 int agregarContacto (Contacto *ap_lista_contactos, int num_contactos) {
 	int i;
 	unsigned short no_numero = 0, arroba = 0, punto = 0, ascii_ext = 0;
@@ -131,9 +188,9 @@ int agregarContacto (Contacto *ap_lista_contactos, int num_contactos) {
 	if (num_contactos < MAX_CONTACTOS) {
 		printf ("Ingrese el nombre del nuevo contacto\n");
 		scanf (" %50[^\n]\n", (ap_lista_contactos + num_contactos)->nombre);
-#ifdef _WIN32
-		reparar ((ap_lista_contactos + num_contactos)->nombre);
-#endif //_WIN32
+	#ifdef _WIN32
+	reparar ((ap_lista_contactos + num_contactos)->nombre);
+	#endif //_WIN32
 
 		printf ("Ingrese el número del nuevo contacto\n");
 		scanf (" %10s", (ap_lista_contactos + num_contactos)->numero);
@@ -213,12 +270,7 @@ int agregarContacto (Contacto *ap_lista_contactos, int num_contactos) {
 	}
 }
 
-/*
- * Declaración: escribirArchivo: Archivo, Contacto , int -> vacio
- * Proposito: Función que toma por argumentos un apuntador a archivo y
- * un arreglo de contactos que usará para abrir un archivo de texto
- * y guardar en el datos de un número entero de estructuras "Contacto"
- */
+// Codigo de la función escribirArchivo
 void escribirArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos, int num_contactos) {
 	int n;
 	ap_archivo = fopen (NOMBRE_ARCHIVO, "w");
@@ -233,38 +285,7 @@ void escribirArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos, int num_co
 	}
 }
 
-/*
- * Declaración: contarFilas: Archivo -> entero
- * Proposito: Función que abre el archivo de los contactos codificados
- * y lo recorre completamente contando el número de filas que este
- * contiene
- */
-int contarFilas (FILE *ap_archivo) {
-	int contador = 0;
-	unsigned char cadena[MAX_NOMBRE + MAX_CORREO + MAX_NUMERO + MAX_NUMCASA + 5];
-	unsigned char *ap_cadena = cadena;
-
-	ap_archivo = fopen (NOMBRE_ARCHIVO, "r");
-
-	if (ap_archivo != NULL) {
-		while (!feof (ap_archivo)) {
-			fscanf (ap_archivo, "%[^\n]\n", ap_cadena);
-			++contador;
-		}
-	}
-	fclose (ap_archivo);
-	return contador;
-}
-
-/* Declaración: leerArchivo : Archivo, Contactos -> numero
- * Próposito: Esta función toma como parámetros un apuntador a un archivo y un
- * apuntador a un arreglo estructuras de contacto, lee los contactos almacenados
- * en el archivo y almacena cada uno en una estructura Contacto, al terminar
- * devuelve el número de contactosque leyo exitosamente-
- * Ejemplo: Con un archivo almacenando 10 contactos
- *	leerArchivo(ap_archivo, Contactos)
- * deberia devolver 10 y rellenar 10 elementos del arreglo
- */
+// Codigo de la función leerArchivo
 int leerArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	int num_contactos = 0, j = 0; // declaramos los contadores que usaremos
 	ap_archivo = fopen (NOMBRE_ARCHIVO, "r+"); // abrimos el archivo en
@@ -302,12 +323,7 @@ int leerArchivo (FILE *ap_archivo, Contacto *ap_lista_contactos) {
 	return num_contactos; // disminuimos y devolvemos el numero de contactos
 }
 
-/*
- * Declaración: decodificar : Contactos, entero -> vacío
- * Propósito: Esta función toma como argumentos un apuntador a un arreglo de
- * Contactos, y para cada uno de los datos que contiene esta estructura, resta 3
- * al cada caracter
- */
+// Codigo de la función decodificar
 void decodificar (Contacto *ap_lista_contactos, int num_contactos) {
 	int i, j;
 	unsigned char *apu;
@@ -334,12 +350,8 @@ void decodificar (Contacto *ap_lista_contactos, int num_contactos) {
 		}
 	}
 }
-
-/*
- * Declaración: imprimirContactos: Contacto , int -> vacio
- * Proposito: Función que toma por argumentos un arreglo de contactos
- * y el tamaño del mismo para imprimir a pantalla todos los "contactos"
- */
+ 
+// Codigo de la función imprimirContactos
 void imprimirContactos (Contacto *ap_lista_contactos, int num_contactos) {
 	int n;
 
