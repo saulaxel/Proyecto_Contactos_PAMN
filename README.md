@@ -2,10 +2,10 @@
 
 Proyecto escolar para la materia de Programación avanzada y metodos numericos
 
-Integrantes:
-*
-*
-*
-*
-*
-*
+Integrantes del equipo:
+ * SIERRA GONZÁLEZ HÉCTOR ALEJANDRO
+ * CABRERA LÓPEZ OSCAR EMILIO
+ * DÍAZ ALFÉREZ MELISA
+ * MENDOZA GARCÍA ULISES
+ * MARTÍNEZ ORTIZ SAÚL AXEL
+ * SÁNCHEZ DÍAZ OMAR DIEGO
